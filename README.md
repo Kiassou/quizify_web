@@ -1,59 +1,37 @@
-# QuizifyWeb
+# 🧠 Quizify - L'expérience Quiz Ultra-Chic
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+[![Angular](https://img.shields.io/badge/Angular-20-DD0031?style=for-the-badge&logo=angular)](https://angular.io/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952b3?style=for-the-badge&logo=bootstrap)](https://getbootstrap.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## Development server
+> **Quizify** est une plateforme de quiz immersive conçue pour offrir une expérience utilisateur fluide et élégante. Alliant la puissance d'**Angular 20** et un design **Glassmorphism** moderne, elle transforme l'apprentissage en un véritable jeu.
 
-To start a local development server, run:
+---
+
+## ✨ Fonctionnalités Clés
+
+* **🎨 Design Premium :** Interface "Chic" utilisant des effets de flou (backdrop-filter), des dégradés dynamiques et des animations interactives.
+* **🔐 Authentification Avancée :** Gestion multi-rôles (Admin & Joueur) avec une interface de connexion sécurisée.
+* **📩 Récupération d'Accès :** Système intelligent d'envoi de code par email pour retrouver son identifiant, avec une modal de vérification ultra-fluide.
+* **🎮 Dashboard Player :** Une interface de navigation par catégories (Sciences, Tech, Histoire, etc.) conçue pour la gamification.
+* **🔔 Feedback Élégant :** Utilisation de **SweetAlert2** personnalisée pour des alertes qui correspondent à la charte graphique.
+
+## 🛠️ Stack Technique
+
+* **Frontend :** Angular 20 (Standalone Components)
+* **Stylisation :** CSS3 (Animations, Flexbox, Glassmorphism)
+* **UI Framework :** Bootstrap 5.3 & Bootstrap Icons
+* **Animations :** Animate.css
+* **Backend compatible :** Spring Boot API
+
+## 🚀 Installation & Lancement
 
 ```bash
+# 1. Cloner le projet
+git clone [https://github.com/Kiassou/quizify_web.git](https://github.com/Kiassou/quizify_web.git)
+
+# 2. Installer les modules
+npm install
+
+# 3. Lancer le serveur de développement
 ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
