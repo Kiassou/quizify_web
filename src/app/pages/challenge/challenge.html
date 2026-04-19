@@ -1,0 +1,56 @@
+<div class="challenge-container">
+    <div class="challenge-bg-overlay"></div>
+
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-5 animate__animated animate__fadeInDown">
+            <button class="btn-back-glass" routerLink="/home-player">
+                <i class="bi bi-arrow-left"></i> Retour au Dashboard
+            </button>
+            <div class="timer-badge">
+                <i class="bi bi-stopwatch-fill"></i> Temps restant : 14h 22m
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="challenge-icon-box animate__animated animate__zoomIn">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    <div class="pulse-ring"></div>
+                </div>
+
+                <div class="challenge-header mt-4 animate__animated animate__fadeInUp">
+                    <span class="badge-day">{{ currentDayName }}</span>
+                    <h1 class="display-4 fw-bold text-white">Mission : {{ challengeTitle }}</h1>
+                    <p class="lead text-white-50 mt-3">{{ challengeDescription }}</p>
+                </div>
+
+                <div class="mission-stats row mt-5 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <span class="label">Récompense</span>
+                            <span class="value">+{{ challengeXp }} XP</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <span class="label">Difficulté</span>
+                            <span class="value">{{ challengeLevel }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <span class="label">Type</span>
+                            <span class="value">Aléatoire</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                    <button class="btn-start-mission" (click)="startChallenge()">
+                        Accepter la Mission <i class="bi bi-rocket-takeoff-fill ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

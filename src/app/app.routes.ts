@@ -42,5 +42,10 @@ export const routes: Routes = [
     path:'leaderboard',
     loadComponent: () =>
       import('./pages/leaderboard/leaderboard').then(m => m.LeaderboardComponent)
-  }
+  },
+  {
+    path:'challenge/:id',
+    loadComponent: () =>
+      import('./pages/challenge/challenge').then(m => m.ChallengePageComponent)
+  },
 ];

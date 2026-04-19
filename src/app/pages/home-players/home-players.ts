@@ -72,7 +72,29 @@ throw new Error('Method not implemented.');
       // On affiche le nom s'il existe, sinon le pseudo
       this.userName = user.nom || user.username || 'Kiassou';
     }
+    
+    this.generateWeek();
   }
+
+  // Dans ta classe de composant
+ weekDays: any[] = [];
+ todayIndex: number = 0;
+
+
+  generateWeek() {
+    const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    const today = new Date().getDay(); 
+    // getDay() donne 0 pour Dimanche, on le réajuste pour que Dimanche soit le 7ème jour (index 6)
+    this.todayIndex = today === 0 ? 6 : today - 1;
+
+    this.weekDays = days.map((label, index) => ({
+        label: label,
+        isPast: index < this.todayIndex,
+        isToday: index === this.todayIndex,
+        isFuture: index > this.todayIndex,
+        dayNum: index + 1 // Utile pour envoyer vers la page défi
+    }));
+ }
 
   /**
    * Logique de déconnexion chic avec SweetAlert2

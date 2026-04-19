@@ -124,22 +124,6 @@
                     </div>
                 </div>
 
-                <h4 class="section-title mb-3 text-white">Quiz Recommandés</h4>
-                <div class="row">
-                    <div class="col-md-4 mb-4" *ngFor="let i of [1,2,3]">
-                        <div class="quiz-explore-card-glass h-100">
-                            <div class="explore-img-glass">
-                                <span class="badge-new-glass">Nouveau</span>
-                                <i class="bi bi-cpu-fill"></i>
-                            </div>
-                            <div class="explore-body">
-                                <h6>Intelligence Artificielle</h6>
-                                <p>15 Questions • 10 min</p>
-                                <button class="btn-start-glass" routerLink="/play-quiz/new">Démarrer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="col-lg-4">
@@ -183,15 +167,70 @@
                     </button>
                 </div>
 
-                <div class="card-glass-sidebar mt-4">
-                    <h5 class="mb-3">Tes Succès</h5>
-                    <div class="achievements-grid">
-                        <div class="ach-icon active" title="Série de 5 jours"><i class="bi bi-fire"></i></div>
-                        <div class="ach-icon active" title="Score parfait"><i class="bi bi-star-fill"></i></div>
-                        <div class="ach-icon"><i class="bi bi-trophy"></i></div>
-                        <div class="ach-icon"><i class="bi bi-mortarboard"></i></div>
+                <div class="card-glass-sidebar mt-4 animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="m-0 chic-title">Expertises</h5>
+                        <span class="ach-count">2/4</span>
+                    </div>
+                
+                    <div class="achievements-grid-chic">
+                        <div class="ach-item active-ach ach-tech" title="Maître de la Tech">
+                            <div class="ach-icon-wrapper">
+                                <i class="bi bi-cpu"></i>
+                                <div class="ach-glow"></div>
+                            </div>
+                        </div>
+                
+                        <div class="ach-item active-ach ach-histoire" title="Explorateur d'Histoire">
+                            <div class="ach-icon-wrapper">
+                                <i class="bi bi-bank"></i>
+                                <div class="ach-glow"></div>
+                            </div>
+                        </div>
+                
+                        <div class="ach-item locked-ach" title="Compléter un quiz Sciences pour débloquer">
+                            <div class="ach-icon-wrapper">
+                                <i class="bi bi-microscope"></i>
+                                <i class="bi bi-lock-fill lock-overlay"></i>
+                            </div>
+                        </div>
+                
+                        <div class="ach-item locked-ach" title="Compléter un quiz Sport pour débloquer">
+                            <div class="ach-icon-wrapper">
+                                <i class="bi bi-trophy"></i>
+                                <i class="bi bi-lock-fill lock-overlay"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="card-glass-sidebar mt-4 animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
+                    <div class="mb-3">
+                        <h5 class="m-0 chic-title">Défis Hebdomadaires</h5>
+                        <p class="small text-white-50">Relève le défi pour garder ton rythme !</p>
+                    </div>
+                
+                    <div class="challenge-days-container">
+                        <div class="day-item" *ngFor="let day of weekDays" [class.day-today]="day.isToday" [class.day-past]="day.isPast"
+                            [routerLink]="['/challenge', day.dayNum]">
+                
+                            <div class="day-circle-wrapper">
+                                <div class="today-ring" *ngIf="day.isToday"></div>
+                
+                                <div class="day-circle">
+                                    <i class="bi" [ngClass]="day.isPast ? 'bi-check-lg' : 'bi-lightning-charge'"></i>
+                                </div>
+                            </div>
+                            <span class="day-label">{{ day.label }}</span>
+                        </div>
+                    </div>
+                
+                    <div class="mt-3 p-2 challenge-info-box">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <span>Aujourd'hui : <strong>Défi Mystère</strong> (+50 XP)</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
