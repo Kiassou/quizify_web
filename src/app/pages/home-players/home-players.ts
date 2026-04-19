@@ -15,8 +15,10 @@ export class HomePlayersComponent implements OnInit {
 getCategoryColor(arg0: string) {
 throw new Error('Method not implemented.');
 }
+  unreadNotifications = 5;
   searchQuery: string = '';
   userName: string = 'Joueur'; // Valeur par défaut
+  activeModal: string | null = null; // 'profile', 'notifications', 'settings' ou null
   
   // Statistiques (peuvent être récupérées via un service plus tard)
   stats = {
@@ -77,8 +79,8 @@ throw new Error('Method not implemented.');
   }
 
   // Dans ta classe de composant
- weekDays: any[] = [];
- todayIndex: number = 0;
+  weekDays: any[] = [];
+  todayIndex: number = 0;
 
 
   generateWeek() {
@@ -95,6 +97,16 @@ throw new Error('Method not implemented.');
         dayNum: index + 1 // Utile pour envoyer vers la page défi
     }));
  }
+
+ 
+  // Méthodes pour ouvrir/fermer les modals
+  openModal(type: string) {
+    this.activeModal = type;
+  }
+
+  closeModal() {
+    this.activeModal = null;
+  }
 
   /**
    * Logique de déconnexion chic avec SweetAlert2

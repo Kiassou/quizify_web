@@ -17,7 +17,7 @@ export class ForgotComponent {
   code: string = '';
   loading: boolean = false;
   showModal: boolean = false;
-  isError: boolean = false; // Pour l'effet de secousse (shake)
+  isError: boolean = false; // Pour l'effet de secousse (shake) sur l'input du code
 
   private apiUrl = 'http://localhost:8080/users';
 errorInCode: any;
@@ -28,61 +28,88 @@ errorInCode: any;
     private cdr: ChangeDetectorRef
   ) {}
 
+  /**
+   * Étape 1 : Envoi de l'email pour recevoir le code de récupération
+   */
   sendEmail() {
-    if (!this.email) return;
+    if (!this.email.trim()) return;
+    
     this.loading = true;
 
+    // Utilisation de responseType: 'text' car certains backends renvoient un simple message de succès
     this.http.post(`${this.apiUrl}/send-code`, null, { 
       params: { email: this.email },
       responseType: 'text' 
     }).subscribe({
-      next: (res) => {
+      next: () => {
         this.loading = false;
         this.showModal = true;
-        this.cdr.detectChanges(); // Force l'ouverture immédiate
+        this.cdr.detectChanges(); // Force Angular à mettre à jour la vue pour afficher la modal
       },
       error: (err) => {
         this.loading = false;
+        console.error("Erreur sendEmail:", err);
         Swal.fire({
           icon: 'error',
-          title: 'Erreur',
-          text: 'Email introuvable ou problème serveur.',
+          title: 'Oups...',
+          text: 'Email introuvable ou erreur serveur. Vérifie ton adresse !',
           confirmButtonColor: '#e73c7e'
         });
       }
     });
   }
 
+  /**
+   * Étape 2 : Vérification du code saisi par l'utilisateur
+   */
   verifyCode() {
-    if (!this.code) return;
-    this.isError = false;
+    if (!this.code.trim()) return;
+    
+    this.isError = false; // Reset de l'état d'erreur
 
     this.http.post<any>(`${this.apiUrl}/verify-code`, null, {
       params: { email: this.email, code: this.code }
     }).subscribe({
       next: (user) => {
-        // LE CODE EST CORRECT : Fermeture auto de la modal de saisie
+        // SUCCÈS : Fermeture de la modal de saisie
         this.showModal = false;
 
-        // Affichage de la modal de succès Ultra-Chic
+        // Affichage de la réponse avec le pseudo retrouvé
         Swal.fire({
-          title: `Bonjour ${user.nom} ! 👋`,
-          html: `Ravi de vous revoir !<br>Votre pseudo est : <b style="color:#e73c7e; font-size:1.4rem;">${user.username}</b>`,
+          title: `Bonjour ${user.prenom || 'joueur'} ! 👋`,
+          html: `Heureux de vous revoir.<br>Votre pseudo de jeu est : <br><b style="color:#23a6d5; font-size:1.6rem; letter-spacing:1px;">${user.username}</b>`,
           icon: 'success',
-          background: 'rgba(255, 255, 255, 0.95)',
-          backdrop: 'rgba(35, 166, 213, 0.4)', // Flou bleuté en arrière-plan
-          confirmButtonText: 'Aller au Login',
+          background: 'rgba(255, 255, 255, 0.98)',
+          backdrop: `rgba(0,0,0,0.4) blur(4px)`, // Flou élégant
+          confirmButtonText: 'Retourner au Login',
           confirmButtonColor: '#23a6d5',
-          showClass: { popup: 'animate__animated animate__backInDown' }
-        }).then(() => {
-          this.router.navigate(['/login']);
+          showClass: {
+            popup: 'animate__animated animate__zoomIn'
+          }
+        }).then((result) => {
+          if (result.isConfirmed || result.isDismissed) {
+            this.router.navigate(['/login']);
+          }
         });
       },
       error: (err) => {
-        // LE CODE EST FAUX : La modal reste, on déclenche la secousse
+        // ERREUR : Le code est mauvais
+        console.error("Erreur verifyCode:", err);
         this.isError = true;
-        setTimeout(() => { this.isError = false; }, 500); // Reset de l'animation
+        
+        // On déclenche une petite vibration/shake via le CSS
+        setTimeout(() => { 
+          this.isError = false; 
+        }, 600);
       }
     });
+  }
+
+  /**
+   * Fermer manuellement la modal
+   */
+  closeModal() {
+    this.showModal = false;
+    this.code = '';
   }
 }

@@ -70,7 +70,7 @@
                         </div>
 
                         <button class="btn btn-success w-100"
-                            [disabled]="!nom || !prenom || !username || !email || loading" (click)="register()"
+                            [disabled]="!nom || !prenom || !username || !email || loading || messageSuccess" (click)="register()"
                             type="button">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
                             <i class="bi bi-check-circle-fill me-2" *ngIf="!loading"></i>

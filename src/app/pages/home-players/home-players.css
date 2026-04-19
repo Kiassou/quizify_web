@@ -628,12 +628,129 @@
     }
 }
 
+
 /* Boîte d'info discrète */
 .challenge-info-box {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     font-size: 0.8rem;
     border-left: 3px solid #e73c7e;
+}
+
+/* Fond du modal avec flou intense */
+.modal-overlay-chic {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.7);
+    /* Bleu nuit très transparent */
+    backdrop-filter: blur(15px) saturate(180%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container Crystal Design */
+.modal-container-chic {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 40px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.modal-header-chic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.chic-modal-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(to right, #fff, #23d5ab);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Avatar Glow Effect */
+.avatar-glow {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    border-radius: 35px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+}
+
+/* Stats Cards */
+.stats-grid-chic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.stat-item .v {
+    display: block;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #23d5ab;
+}
+
+.stat-item .l {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    text-transform: uppercase;
+}
+
+/* Progress Bar */
+.progress-glass {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill-chic {
+    height: 100%;
+    background: linear-gradient(to right, #23d5ab, #23a6d5);
+    box-shadow: 0 0 15px rgba(35, 213, 171, 0.5);
+}
+
+/* Bouton Fermer */
+.close-btn-chic {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.close-btn-chic:hover {
+    background: #ff4757;
+    transform: rotate(90deg);
 }
 
 /* --- BOUTONS --- */
@@ -648,6 +765,61 @@
     background: white;
     color: #333;
     transition: 0.3s;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.notification-btn:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.notification-circle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.notification-circle i {
+    font-size: 18px;
+    margin-right: 4px;
+    /* Petit espace avant le texte */
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
 
 .btn-play-glass:hover,
@@ -681,8 +853,80 @@
 
 /* --- DROPDOWN --- */
 .dropbtn-glass {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.dropbtn-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.6s;
+}
+
+.dropbtn-glass:hover::before {
+    left: 100%;
+}
+
+.dropbtn-glass:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.dropbtn-glass:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.avatar-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.dropbtn-glass:hover .avatar-circle {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0.15));
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.dropbtn-glass {
     background: none;
     border: none;
+    border-radius: 50%;
     color: white;
     cursor: pointer;
     display: flex;
@@ -742,6 +986,37 @@
     text-align: left;
 }
 
+.dropdown-item-chic {
+    display: flex;
+    align-items: center; /* Alignement vertical parfait */
+    gap: 12px; /* Espace fixe entre icône et texte */
+    padding: 12px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.dropdown-item-chic:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0; /* Empêche la réduction de taille */
+}
+
+.dropdown-body span {
+    font-weight: 500;
+    flex: 1; /* Prend tout l'espace disponible */
+}
 .user-meta strong {
     display: block;
     font-size: 1.1rem;

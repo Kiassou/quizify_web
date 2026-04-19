@@ -1,0 +1,75 @@
+.notifications-container {
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.notification-list-glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.group-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+.notif-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.notif-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.notif-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Couleurs par type */
+.bg-challenge {
+    background: #e73c7e;
+}
+
+.bg-trophy {
+    background: #FFD700;
+    color: #1a1a2e;
+}
+
+.notif-content {
+    flex-grow: 1;
+}
+
+.notif-date {
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+.btn-action-small {
+    background: white;
+    color: #1a1a2e;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
