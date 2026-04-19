@@ -1,0 +1,179 @@
+/* --- PODIUM STYLES --- */
+.podium-container {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.podium-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.podium-avatar {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.podium-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.rank-badge {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.podium-name {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.podium-xp {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Marches du podium */
+.step {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    backdrop-filter: blur(10px);
+}
+
+.gold-step {
+    height: 120px;
+    background: linear-gradient(to bottom, #FFD700, rgba(255, 215, 0, 0.2));
+}
+
+.silver-step {
+    height: 80px;
+    background: linear-gradient(to bottom, #C0C0C0, rgba(192, 192, 192, 0.2));
+}
+
+.bronze-step {
+    height: 50px;
+    background: linear-gradient(to bottom, #CD7F32, rgba(205, 127, 50, 0.2));
+}
+
+.gold .rank-badge {
+    background: #FFD700;
+}
+
+.silver .rank-badge {
+    background: #C0C0C0;
+}
+
+.bronze .rank-badge {
+    background: #CD7F32;
+}
+
+.crown-icon {
+    font-size: 2rem;
+    color: #FFD700;
+    margin-bottom: 5px;
+    animation: bounce 2s infinite;
+}
+
+/* --- TABLEAU GLASS --- */
+.leaderboard-table-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px;
+    padding: 15px 20px;
+    opacity: 0.6;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rank-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+.rank-row:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.01);
+}
+
+.is-me {
+    background: rgba(231, 60, 126, 0.2);
+    border: 1px solid rgba(231, 60, 126, 0.3);
+}
+
+.r-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.r-avatar {
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.r-name {
+    font-weight: 600;
+}
+
+.r-xp {
+    font-weight: 800;
+    text-align: right;
+}
+
+.me-badge {
+    background: #e73c7e;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}

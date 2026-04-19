@@ -1,0 +1,147 @@
+/* Bouton retour chic */
+.btn-back {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: white;
+    color: #e73c7e;
+    transform: translateX(-5px);
+}
+
+/* Carte Longue Glassmorphism */
+.quiz-long-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.quiz-long-card:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Section */
+.quiz-info-section {
+    display: flex;
+    align-items: center;
+}
+
+.icon-box-chic {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.badge-category {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.quiz-title-large {
+    font-weight: 800;
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.quiz-meta {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+/* Progress & Button Section */
+.quiz-progress-section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 40%;
+}
+
+.progress-details {
+    flex-grow: 1;
+}
+
+.progress-percent {
+    display: block;
+    text-align: right;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.progress-track-chic {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill-chic {
+    height: 100%;
+    background: white;
+    box-shadow: 0 0 15px white;
+    border-radius: 10px;
+}
+
+.btn-resume-ultra {
+    background: white;
+    color: #333;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn-resume-ultra:hover {
+    background: #23a6d5;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
+    .quiz-long-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .quiz-progress-section {
+        width: 100%;
+        margin-top: 25px;
+        gap: 20px;
+    }
+}

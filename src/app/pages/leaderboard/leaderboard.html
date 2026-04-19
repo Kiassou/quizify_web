@@ -1,0 +1,70 @@
+<div class="home-container">
+    <nav class="player-nav animate__animated animate__fadeInDown">
+        <div class="nav-left">
+            <button class="btn-back" routerLink="/home-player">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <h2 class="brand-logo ms-3">Classement Global<span>.</span></h2>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row align-items-end mb-5 podium-container animate__animated animate__zoomIn">
+            <div class="col-4 px-1">
+                <div class="podium-card silver">
+                    <div class="podium-avatar">
+                        <img src="https://i.pravatar.cc/150?u=2" alt="Avatar">
+                        <div class="rank-badge">2</div>
+                    </div>
+                    <span class="podium-name">Sarah.JS</span>
+                    <span class="podium-xp">4,850 XP</span>
+                    <div class="step silver-step"></div>
+                </div>
+            </div>
+            <div class="col-4 px-1">
+                <div class="podium-card gold">
+                    <i class="bi bi-crown-fill crown-icon"></i>
+                    <div class="podium-avatar">
+                        <img src="https://i.pravatar.cc/150?u=1" alt="Avatar">
+                        <div class="rank-badge">1</div>
+                    </div>
+                    <span class="podium-name">Alpha_Dev</span>
+                    <span class="podium-xp">5,200 XP</span>
+                    <div class="step gold-step"></div>
+                </div>
+            </div>
+            <div class="col-4 px-1">
+                <div class="podium-card bronze">
+                    <div class="podium-avatar">
+                        <img src="https://i.pravatar.cc/150?u=3" alt="Avatar">
+                        <div class="rank-badge">3</div>
+                    </div>
+                    <span class="podium-name">CodeMaster</span>
+                    <span class="podium-xp">4,100 XP</span>
+                    <div class="step bronze-step"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="leaderboard-table-glass animate__animated animate__fadeInUp">
+            <div class="table-header">
+                <span class="h-rank">Rang</span>
+                <span class="h-player">Joueur</span>
+                <span class="h-xp text-end">Points XP</span>
+            </div>
+
+            <div class="table-body">
+                <div class="rank-row" *ngFor="let p of otherPlayers; let i = index"
+                    [class.is-me]="p.name === 'Kiassou'">
+                    <div class="r-pos">{{ i + 4 }}</div>
+                    <div class="r-info">
+                        <div class="r-avatar"><i class="bi bi-person"></i></div>
+                        <span class="r-name">{{ p.name }}</span>
+                        <span class="me-badge" *ngIf="p.name === 'Kiassou'">Moi</span>
+                    </div>
+                    <div class="r-xp">{{ p.xp | number }} XP</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+<div class="home-container">
+    <nav class="player-nav animate__animated animate__fadeInDown">
+        <div class="nav-left">
+            <h2 class="brand-logo">Quizify<span>.</span></h2>
+        </div>
+
+        <div class="search-bar-glass">
+            <i class="bi bi-search"></i>
+            <input type="text" [(ngModel)]="searchQuery" placeholder="Trouver un défi...">
+        </div>
+
+        <div class="nav-right">
+            <div class="user-info">
+                <div class="xp-container">
+                    <span class="xp-label">Niveau 12</span>
+                    <span class="xp-badge">{{ stats.points }} XP</span>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn-glass">
+                        <div class="avatar-circle">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <i class="bi bi-chevron-down small"></i>
+                    </button>
+                    <div class="dropdown-content-glass animate__animated animate__fadeIn">
+                        <div class="dropdown-header-chic">
+                            <div class="user-meta">
+                                <strong>{{ userName }}</strong>
+                                <span class="status-badge"><i class="bi bi-patch-check-fill"></i> Joueur Élite</span>
+                            </div>
+                        </div>
+                    
+                        <div class="dropdown-body">
+                            <a href="#" class="dropdown-item-chic">
+                                <div class="icon-circle bg-profile"><i class="bi bi-person-badge"></i></div>
+                                <span>Mon Profil</span>
+                            </a>
+                            <a href="#" class="dropdown-item-chic">
+                                <div class="icon-circle bg-settings"><i class="bi bi-gear-wide-connected"></i></div>
+                                <span>Paramètres</span>
+                            </a>
+                            <a href="#" class="dropdown-item-chic">
+                                <div class="icon-circle bg-help"><i class="bi bi-question-circle"></i></div>
+                                <span>Aide & Support</span>
+                            </a>
+                    
+                            <div class="dropdown-divider-chic"></div>
+                    
+                            <a (click)="logout()" class="dropdown-item-chic logout-item-chic">
+                                <div class="icon-circle bg-logout"><i class="bi bi-power"></i></div>
+                                <span>Déconnexion</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid main-content p-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="welcome-card-glass mb-4 animate__animated animate__fadeIn">
+                    <div class="welcome-content">
+                        <div class="welcome-text">
+                            <h2>Content de te revoir, <span class="user-highlight">{{ userName }}</span> ! 🎯</h2>
+                            <p>Ton dernier quiz sur la <strong>Tech</strong> t'attend. <br> Ne perds pas ton rythme, la première place
+                                est proche !</p>
+                
+                            <div class="welcome-actions">
+                                <button class="btn-primary-white" [routerLink]="['/quiz']">
+                                    Continuer l'aventure <i class="bi bi-arrow-right-short"></i>
+                                </button>
+                                <div class="streak-mini">
+                                    <i class="bi bi-fire"></i> <span>Défie ton intelligence !</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-visual">
+                            <div class="floating-icon">🚀</div>
+                            <div class="visual-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header-chic d-flex justify-content-between align-items-center mb-4 text-white">
+                    <div class="title-with-indicator">
+                        <h4 class="section-title">En cours</h4>
+                        <div class="title-line"></div>
+                    </div>
+                    
+                    <button class="view-all-link" [routerLink]="['/active-quizzes']">
+                        <span>Explorer tout</span>
+                        <i class="bi bi-arrow-right-short"></i>
+                    </button>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-md-6 mb-4 animate__animated animate__fadeInUp" *ngFor="let quiz of recentQuizzesLimit; let i = index"
+                        [style.animation-delay]="i * 0.15 + 's'">
+                        <div class="card-glass-quiz">
+                            <div class="card-header-quiz">
+                                <div class="icon-wrapper-glass">
+                                    <i [class]="'bi ' + quiz.icon"></i>
+                                </div>
+                                <div>
+                                    <h5>{{ quiz.title }}</h5>
+                                    <span class="cat-tag">{{ quiz.category }}</span>
+                                </div>
+                            </div>
+                            <div class="progress-info mt-4">
+                                <div class="d-flex justify-content-between mb-2 small">
+                                    <span>Progression</span>
+                                    <span>{{ quiz.progress }}%</span>
+                                </div>
+                                <div class="progress-container-glass">
+                                    <div class="progress-bar-chic" [style.width.%]="quiz.progress"></div>
+                                </div>
+                            </div>
+                            <button class="btn-play-glass mt-3" [routerLink]="['/quiz']">
+                                Jouer <i class="bi bi-play-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="section-title mb-3 text-white">Quiz Recommandés</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-4" *ngFor="let i of [1,2,3]">
+                        <div class="quiz-explore-card-glass h-100">
+                            <div class="explore-img-glass">
+                                <span class="badge-new-glass">Nouveau</span>
+                                <i class="bi bi-cpu-fill"></i>
+                            </div>
+                            <div class="explore-body">
+                                <h6>Intelligence Artificielle</h6>
+                                <p>15 Questions • 10 min</p>
+                                <button class="btn-start-glass" routerLink="/play-quiz/new">Démarrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card-glass-sidebar animate__animated animate__fadeInRight">
+                    <div class="leaderboard-header-chic mb-4">
+                        <h4>Top Players <span class="badge-count">5</span> 🏆</h4>
+                        <p class="small text-white-50">Mis à jour en direct</p>
+                    </div>
+                
+                    <div class="leaderboard-list">
+                        <div class="player-rank-chic" *ngFor="let p of [1,2,3,4,5]; let i = index" [class.top-three]="i < 3"
+                            [class.current-user]="i === 3">
+                
+                            <div class="rank-number">
+                                <span *ngIf="i > 2">{{i + 1}}</span>
+                                <i class="bi bi-trophy-fill medal-gold" *ngIf="i === 0"></i>
+                                <i class="bi bi-trophy-fill medal-silver" *ngIf="i === 1"></i>
+                                <i class="bi bi-trophy-fill medal-bronze" *ngIf="i === 2"></i>
+                            </div>
+                
+                            <div class="player-avatar-wrapper">
+                                <div class="player-avatar-mini">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                                <div class="online-indicator" *ngIf="i % 2 === 0"></div>
+                            </div>
+                
+                            <div class="player-info-main">
+                                <span class="p-name">Joueur {{i + 1}}</span>
+                                <div class="p-stats">
+                                    <span class="p-xp">{{2000 - (i*200)}} XP</span>
+                                    <span class="p-streak" *ngIf="i < 2"><i class="bi bi-fire"></i> {{5 - i}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <button class="btn-full-rank-glass mt-4 w-100" [routerLink]="['/leaderboard']">
+                        <span>Classement complet</span>
+                        <i class="bi bi-arrow-right-short"></i>
+                    </button>
+                </div>
+
+                <div class="card-glass-sidebar mt-4">
+                    <h5 class="mb-3">Tes Succès</h5>
+                    <div class="achievements-grid">
+                        <div class="ach-icon active" title="Série de 5 jours"><i class="bi bi-fire"></i></div>
+                        <div class="ach-icon active" title="Score parfait"><i class="bi bi-star-fill"></i></div>
+                        <div class="ach-icon"><i class="bi bi-trophy"></i></div>
+                        <div class="ach-icon"><i class="bi bi-mortarboard"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

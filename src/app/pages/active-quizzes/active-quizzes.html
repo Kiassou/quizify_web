@@ -1,0 +1,45 @@
+<div class="home-container">
+    <nav class="player-nav animate__animated animate__fadeInDown">
+        <div class="nav-left">
+            <button class="btn-back" routerLink="/home-player">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <h2 class="brand-logo ms-3">Quiz en cours<span>.</span></h2>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 mb-4 animate__animated animate__fadeInUp"
+                *ngFor="let quiz of recentQuizzes; let i = index" [style.animation-delay]="i * 0.1 + 's'">
+                <div class="quiz-long-card">
+                    <div class="quiz-info-section">
+                        <div class="icon-box-chic" [style.background]="'linear-gradient(135deg, #e73c7e, #ee7752)'">
+                            <i [class]="'bi ' + quiz.icon"></i>
+                        </div>
+                        <div class="ms-4">
+                            <span class="badge-category">{{ quiz.category }}</span>
+                            <h3 class="quiz-title-large">{{ quiz.title }}</h3>
+                            <p class="quiz-meta">
+                                <i class="bi bi-question-circle"></i> 12/20 questions complétées
+                                <span class="ms-3"><i class="bi bi-clock"></i> 5 min restantes</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="quiz-progress-section">
+                        <div class="progress-details">
+                            <span class="progress-percent">{{ quiz.progress }}%</span>
+                            <div class="progress-track-chic">
+                                <div class="progress-fill-chic" [style.width.%]="quiz.progress"></div>
+                            </div>
+                        </div>
+                        <button class="btn-resume-ultra" [routerLink]="['/play-quiz', quiz.id]">
+                            Continuer <i class="bi bi-play-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

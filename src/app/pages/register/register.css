@@ -1,0 +1,381 @@
+/* Arrière-plan harmonisé avec le Login */
+.bg-register {
+    background: linear-gradient(-45deg, #23a6d5, #23d5ab, #ee7752, #e73c7e);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glassmorphism Card pour Register */
+.register-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(15px);
+    border-radius: 25px !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    animation: fadeInUp 0.8s ease-out;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Style des Inputs "Chic" */
+.form-control {
+    background: rgba(248, 249, 250, 0.8) !important;
+    border: 2px solid transparent !important;
+    border-radius: 12px !important;
+    padding: 12px 15px !important;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.form-control:focus {
+    background: #fff !important;
+    border-color: #23d5ab !important;
+    box-shadow: 0 5px 15px rgba(35, 213, 171, 0.2) !important;
+    transform: translateX(5px);
+    /* Petit effet de décalage chic au focus */
+}
+
+/* Bouton S'inscrire Ultra Design */
+.btn-success {
+    background: linear-gradient(to right, #23d5ab, #23a6d5) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s ease !important;
+    margin-top: 10px;
+}
+
+.btn-success:hover:not(:disabled) {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(35, 213, 171, 0.4) !important;
+    filter: brightness(1.1);
+}
+
+.btn-success:disabled {
+    background: #bdc3c7 !important;
+    cursor: not-allowed;
+}
+
+/* Logo & Branding */
+.logo {
+    width: 70px;
+    animation: bounce 2s infinite;
+}
+
+.brand {
+    font-weight: 800;
+    background: linear-gradient(to right, #e73c7e, #23a6d5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Lien retour */
+.text-center a {
+    color: #e73c7e;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.text-center a:hover {
+    color: #23a6d5;
+    text-decoration: underline;
+}
+
+/* Animations supplémentaires */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* --- NOUVEAU : Bulles de questions animées --- */
+.background-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.circle {
+    position: absolute;
+    bottom: -100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: bold;
+    font-size: 1.5rem;
+    backdrop-filter: blur(5px);
+    animation: floatUp 10s linear infinite;
+}
+
+/* Contenu des bulles (Symboles de quiz) */
+.circle-1::after {
+    content: "?";
+}
+
+.circle-2::after {
+    content: "!";
+}
+
+.circle-3::after {
+    content: "✓";
+}
+
+.circle-4::after {
+    content: "✗";
+}
+
+.circle-5::after {
+    content: "★";
+}
+
+.circle-6::after {
+    content: "⚡";
+}
+
+.circle-7::after {
+    content: "💡";
+}
+
+.circle-8::after {
+    content: "📚";
+}
+
+.circle-9::after {
+    content: "🎯";
+}
+
+.circle-10::after {
+    content: "🧠";
+}
+
+/* Bulles supplémentaires (via CSS pour ne pas toucher au HTML) */
+.circle-1::after {
+    content: "?";
+}
+
+.circle-2::after {
+    content: " H₂O";
+}
+
+.circle-3::after {
+    content: "π";
+}
+
+.circle-4::after {
+    content: "✗";
+}
+
+.circle-5::after {
+    content: "</>";
+}
+
+.circle-6::after {
+    content: "%d";
+}
+
+.circle-7::after {
+    content: "A+B";
+}
+
+.circle-8::after {
+    content: "P=m.g";
+}
+
+.circle-9::after {
+    content: "E=mc²";
+}
+
+.circle-10::after {
+    content: "5+4=?";
+}
+
+/* Bulles supplémentaires (via CSS pour ne pas toucher au HTML) */
+.circle-1 {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    animation-duration: 8s;
+}
+
+.circle-2 {
+    width: 60px;
+    height: 60px;
+    left: 30%;
+    animation-duration: 12s;
+    animation-delay: 2s;
+}
+
+.circle-3 {
+    width: 50px;
+    height: 50px;
+    left: 70%;
+    animation-duration: 10s;
+    animation-delay: 4s;
+}
+
+.circle-4 {
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    animation-duration: 14s;
+    animation-delay: 1s;
+}
+
+.circle-5 {
+    width: 70px;
+    height: 70px;
+    left: 20%;
+    animation-duration: 9s;
+    animation-delay: 3s;
+}
+
+.circle-6 {
+    width: 60px;
+    height: 60px;
+    left: 80%;
+    animation-duration: 11s;
+    animation-delay: 5s;
+}
+
+.circle-7 {
+    width: 60px;
+    height: 60px;
+    left: 40%;
+    animation-duration: 13s;
+    animation-delay: 2s;
+}
+
+.circle-8 {
+    width: 90px;
+    height: 80px;
+    left: 60%;
+    animation-duration: 10s;
+    animation-delay: 4s;
+}
+
+.circle-9 {
+    width: 90px;
+    height: 70px;
+    left: 25%;
+    animation-duration: 12s;
+    animation-delay: 3s;
+}
+
+.circle-10 {
+    width: 90px;
+    height: 90px;
+    left: 75%;
+    animation-duration: 9s;
+    animation-delay: 1s;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- CHAMP DE SAISIE CHIC --- */
+.custom-input-group {
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid transparent;
+    border-radius: 15px !important;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.custom-input-group:focus-within {
+    background: #fff;
+    border-color: #23a6d5;
+    box-shadow: 0 0 15px rgba(35, 166, 213, 0.3);
+    transform: scale(1.02);
+}
+
+.custom-input-group .form-control {
+    border: none !important;
+    background: transparent !important;
+    padding: 12px 15px !important;
+    font-weight: 500;
+}
+
+.custom-input-group .input-group-text i {
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #e73c7e, #23a6d5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Style des labels et liens */
+.custom-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #555;
+    margin-left: 5px;
+}
+
+.forgot-link,
+.register-link {
+    color: #e73c7e;
+    transition: 0.3s;
+}
+
+.forgot-link:hover,
+.register-link:hover {
+    color: #23a6d5;
+    text-shadow: 0 0 8px rgba(35, 166, 213, 0.2);
+} 

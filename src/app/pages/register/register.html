@@ -1,0 +1,105 @@
+<div class="container-fluid bg-register">
+
+    <div class="background-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle circle-4"></div>
+        <div class="circle circle-5"></div>
+        <div class="circle circle-6"></div>
+        <div class="circle circle-7"></div>
+        <div class="circle circle-8"></div>
+        <div class="circle circle-9"></div>
+        <div class="circle circle-10"></div>
+    </div>
+
+    <div class="row justify-content-center align-items-center min-vh-100">
+
+        <div class="col-11 col-md-6 col-lg-4">
+            <div class="card shadow-lg border-0 p-4 register-card">
+
+                <div class="text-center mb-3">
+                    <!--<img src="assets/logo.png" class="logo">-->
+                    <h3 class="brand">Quizify</h3>
+                </div>
+
+                <p class="text-center text-muted">
+                    Crée ton compte et commence à tester ton intelligence avec Quizify
+                </p>
+
+                <div class="card-body">
+                    <form>
+
+                        <div class="mb-3">
+                            <div class="input-group custom-input-group">
+                                <span class="input-group-text border-0 bg-transparent">
+                                    <i class="bi bi-person"></i>
+                                </span>
+                                <input class="form-control" placeholder="Nom" [(ngModel)]="nom" name="nom" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group custom-input-group">
+                                <span class="input-group-text border-0 bg-transparent">
+                                    <i class="bi bi-person-vcard"></i>
+                                </span>
+                                <input class="form-control" placeholder="Prénom" [(ngModel)]="prenom" name="prenom"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group custom-input-group">
+                                <span class="input-group-text border-0 bg-transparent">
+                                    <i class="bi bi-at"></i>
+                                </span>
+                                <input class="form-control" placeholder="Nom d'utilisateur" [(ngModel)]="username"
+                                    name="username" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="input-group custom-input-group">
+                                <span class="input-group-text border-0 bg-transparent">
+                                    <i class="bi bi-envelope-at"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email"
+                                    name="email" required>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success w-100"
+                            [disabled]="!nom || !prenom || !username || !email || loading" (click)="register()"
+                            type="button">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                            <i class="bi bi-check-circle-fill me-2" *ngIf="!loading"></i>
+                            S'inscrire
+                        </button>
+
+                    </form>
+                </div>
+
+                <div class="text-center mt-3">
+                    <p class="mb-0 text-muted">
+                        Déjà un compte ?
+                        <a href="/login" class="register-link ms-1">Se connecter</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="px-4 position-fixed bottom-0 start-50 translate-middle-x mb-4 w-auto zindex-999">
+        <div *ngIf="messageSuccess" class="alert alert-success animate__animated animate__fadeInDown">
+            <i class="bi bi-check-all me-2"></i> {{ messageSuccess }}
+        </div>
+    
+        <div *ngIf="messageError" class="alert alert-danger animate__animated animate__shakeX">
+            <i class="bi bi-exclamation-circle me-2"></i> {{ messageError }}
+        </div>
+    </div>
+</div>
+

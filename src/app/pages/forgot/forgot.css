@@ -1,0 +1,421 @@
+/* Arrière-plan identique au Login/Register */
+.bg-forgot {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glassmorphism Card (Exactement comme Login) */
+.forgot-card,
+.modal-content-chic {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    transition: transform 0.3s ease;
+}
+
+/* Modal Overlay (Flou d'arrière-plan quand le code est demandé) */
+.modal-backdrop-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Champ de saisie "Chic" (Style Capsule) */
+.custom-input-group {
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid transparent;
+    border-radius: 15px !important;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.custom-input-group:focus-within {
+    background: #fff;
+    border-color: #23a6d5;
+    box-shadow: 0 0 15px rgba(35, 166, 213, 0.3);
+    transform: scale(1.02);
+}
+
+.custom-input-group .form-control {
+    border: none !important;
+    background: transparent !important;
+    padding: 12px 15px !important;
+    font-weight: 500;
+}
+
+/* Icônes avec dégradé */
+.custom-input-group .input-group-text i {
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #e73c7e, #23a6d5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Boutons (Style Quizify) */
+.btn-chic,
+.btn-chic-success {
+    background: linear-gradient(to right, #e73c7e, #ee7752) !important;
+    border: none !important;
+    color: white !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    transition: all 0.3s ease !important;
+}
+
+.btn-chic:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(231, 60, 126, 0.4) !important;
+}
+
+/* Logo & Bulles (Réutilisé) */
+.logo {
+    width: 80px;
+    animation: pulse 2s infinite;
+}
+
+.brand {
+    font-weight: 800;
+    color: #333;
+}
+
+/* Styles des bulles (Copie conforme du Login) */
+.circle {
+    position: absolute;
+    bottom: -100px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    animation: floatUp 10s linear infinite;
+}
+
+/* Contenu des bulles (Symboles de quiz) */
+.circle-1::after {
+    content: "?";
+}
+
+.circle-2::after {
+    content: "!";
+}
+
+.circle-3::after {
+    content: "✓";
+}
+
+.circle-4::after {
+    content: "✗";
+}
+
+.circle-5::after {
+    content: "★";
+}
+
+.circle-6::after {
+    content: "⚡";
+}
+
+.circle-7::after {
+    content: "💡";
+}
+
+.circle-8::after {
+    content: "📚";
+}
+
+.circle-9::after {
+    content: "🎯";
+}
+
+.circle-10::after {
+    content: "🧠";
+}
+
+/* Bulles supplémentaires (via CSS pour ne pas toucher au HTML) */
+.circle-1::after {
+    content: "?";
+}
+
+.circle-2::after {
+    content: " H₂O";
+}
+
+.circle-3::after {
+    content: "π";
+}
+
+.circle-4::after {
+    content: "✗";
+}
+
+.circle-5::after {
+    content: "</>";
+}
+
+.circle-6::after {
+    content: "%d";
+}
+
+.circle-7::after {
+    content: "A+B";
+}
+
+.circle-8::after {
+    content: "P=m.g";
+}
+
+.circle-9::after {
+    content: "E=mc²";
+}
+
+.circle-10::after {
+    content: "5+4=?";
+}
+
+/* Bulles supplémentaires (via CSS pour ne pas toucher au HTML) */
+.circle-1 {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    animation-duration: 8s;
+}
+
+.circle-2 {
+    width: 60px;
+    height: 60px;
+    left: 30%;
+    animation-duration: 12s;
+    animation-delay: 2s;
+}
+
+.circle-3 {
+    width: 50px;
+    height: 50px;
+    left: 70%;
+    animation-duration: 10s;
+    animation-delay: 4s;
+}
+
+.circle-4 {
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    animation-duration: 14s;
+    animation-delay: 1s;
+}
+
+.circle-5 {
+    width: 70px;
+    height: 70px;
+    left: 20%;
+    animation-duration: 9s;
+    animation-delay: 3s;
+}
+
+.circle-6 {
+    width: 60px;
+    height: 60px;
+    left: 80%;
+    animation-duration: 11s;
+    animation-delay: 5s;
+}
+
+.circle-7 {
+    width: 60px;
+    height: 60px;
+    left: 40%;
+    animation-duration: 13s;
+    animation-delay: 2s;
+}
+
+.circle-8 {
+    width: 90px;
+    height: 80px;
+    left: 60%;
+    animation-duration: 10s;
+    animation-delay: 4s;
+}
+
+.circle-9 {
+    width: 90px;
+    height: 70px;
+    left: 25%;
+    animation-duration: 12s;
+    animation-delay: 3s;
+}
+
+.circle-10 {
+    width: 90px;
+    height: 90px;
+    left: 75%;
+    animation-duration: 9s;
+    animation-delay: 1s;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- CHAMP DE SAISIE CHIC --- */
+.custom-input-group {
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid transparent;
+    border-radius: 15px !important;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.custom-input-group:focus-within {
+    background: #fff;
+    border-color: #23a6d5;
+    box-shadow: 0 0 15px rgba(35, 166, 213, 0.3);
+    transform: scale(1.02);
+}
+
+.custom-input-group .form-control {
+    border: none !important;
+    background: transparent !important;
+    padding: 12px 15px !important;
+    font-weight: 500;
+}
+
+.custom-input-group .input-group-text i {
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #e73c7e, #23a6d5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Style des labels et liens */
+.custom-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #555;
+    margin-left: 5px;
+}
+
+.forgot-link,
+.register-link {
+    color: #e73c7e;
+    transition: 0.3s;
+}
+
+.forgot-link:hover,
+.register-link:hover {
+    color: #23a6d5;
+    text-shadow: 0 0 8px rgba(35, 166, 213, 0.2);
+}
+
+/* Le fond noir semi-transparent qui couvre tout l'écran */
+.modal-backdrop-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    /* Flou chic */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* La carte de la modal */
+.modal-content-chic {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10000;
+}
+
+/* Le style du champ de code */
+.code-input {
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.modal-backdrop-custom {
+    display: flex !important;
+    /* Force l'alignement centré */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animation de secousse pour code incorrect */
+.shake-error {
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+    border: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* On s'assure que le backdrop de la modal est bien au-dessus et flou */
+
+.modal-backdrop-custom {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(15px) saturate(180%) !important;
+    z-index: 10000 !important;
+}

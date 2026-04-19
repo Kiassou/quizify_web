@@ -1,0 +1,78 @@
+<div class="container-fluid bg-forgot">
+    <div class="background-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle circle-4"></div>
+        <div class="circle circle-5"></div>
+        <div class="circle circle-6"></div>
+        <div class="circle circle-7"></div>
+        <div class="circle circle-8"></div>
+        <div class="circle circle-9"></div>
+        <div class="circle circle-10"></div>
+    </div>
+
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-11 col-md-5 col-lg-4">
+            <div class="card p-4 shadow-lg forgot-card animate__animated animate__fadeIn">
+
+                <div class="text-center mb-3">
+                    <!--<img src="assets/logo.png" class="logo mb-2">-->
+                    <h3 class="brand">Quizify</h3>
+                </div>
+
+                <p class="text-center text-muted">
+                    Récupère ton accès en entrant ton email 📩
+                </p>
+
+                <div class="mb-4">
+                    <div class="input-group custom-input-group">
+                        <span class="input-group-text border-0 bg-transparent">
+                            <i class="bi bi-envelope-heart-fill"></i>
+                        </span>
+                        <input class="form-control" placeholder="Entrer votre email" [(ngModel)]="email" name="email">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100 btn-chic" [disabled]="!email || loading" (click)="sendEmail()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                    <i class="bi bi-send-fill me-2" *ngIf="!loading"></i>
+                    Envoyer le code
+                </button>
+
+                <div class="text-center mt-4">
+                    <a href="/login" class="link-back"><i class="bi bi-arrow-left me-1"></i> Retour à la connexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop-custom" *ngIf="showModal">
+    <div class="modal-dialog-centered d-flex justify-content-center align-items-center w-100 h-100">
+        <div class="card modal-content-chic p-4 animate__animated animate__zoomIn" [class.shake-error]="errorInCode">
+
+            <div class="text-center mb-3">
+                <div class="icon-circle mb-3">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+                <h4 class="fw-bold">Vérification</h4>
+                <p class="text-muted">Le code est arrivé ! Regarde tes mails.</p>
+            </div>
+
+            <div class="mb-4">
+                <input class="form-control code-input text-center" placeholder="• • • • • •" [(ngModel)]="code"
+                    maxlength="6">
+                <p *ngIf="errorInCode" class="text-danger text-center mt-2 small">Code incorrect, réessaye !</p>
+            </div>
+
+            <button class="btn btn-success w-100 btn-chic-success" (click)="verifyCode()">
+                Vérifier <i class="bi bi-patch-check-fill ms-2"></i>
+            </button>
+
+            <button class="btn btn-link text-muted mt-2 w-100 text-decoration-none" (click)="showModal = false">
+                Annuler
+            </button>
+        </div>
+    </div>
+</div>
