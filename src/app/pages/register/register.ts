@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http'; 
-import { Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    RouterModule 
   ],
   templateUrl: './register.html',
   styleUrls: ['./register.css']
@@ -28,7 +30,7 @@ export class RegisterComponent {
   messageError: string = '';
 
   // URL du Backend (Assure-toi que le port 8080 est bien celui de ton Spring Boot)
-  private apiUrl = 'http://localhost:8080/users/register';
+  private apiUrl = `${environment.apiUrl}/users/login`;
 
   constructor(private http: HttpClient, private router: Router) {}
 

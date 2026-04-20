@@ -2,12 +2,12 @@
   "name": "quizify-web",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
+  "start": "ng serve",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "deploy": "ng build --configuration production --base-href \"/quizify_web/\" && npx angular-cli-ghpages --dir=dist/quizify_web"
+ },
   "private": true,
   "packageManager": "npm@10.9.3",
   "dependencies": {

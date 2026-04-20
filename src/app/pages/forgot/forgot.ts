@@ -2,13 +2,14 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-forgot',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './forgot.html',
   styleUrls: ['./forgot.css']
 })
@@ -19,8 +20,8 @@ export class ForgotComponent {
   showModal: boolean = false;
   isError: boolean = false; // Pour l'effet de secousse (shake) sur l'input du code
 
-  private apiUrl = 'http://localhost:8080/users';
-errorInCode: any;
+  private apiUrl = `${environment.apiUrl}/users/login`;
+  errorInCode: any;
 
   constructor(
     private http: HttpClient, 

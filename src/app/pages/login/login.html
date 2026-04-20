@@ -45,9 +45,7 @@
                         </div>
 
                         <div class="text-end mb-4">
-                            <a href="/forgot" class="forgot-link text-decoration-none">
-                                Pseudo oublié ?
-                            </a>
+                            <a [routerLink]="['/forgot']" class="forgot-link">Pseudo oublié ?</a>
                         </div>
 
                         <button type="submit" class="btn btn-login w-100 mb-4" [disabled]="!username || loading">
@@ -61,7 +59,7 @@
                 <div class="card-footer bg-transparent border-0 text-center pb-4">
                     <p class="mb-0 text-muted">
                         Nouveau ici ?
-                        <a href="/register" class="register-link fw-bold ms-1">Créer un compte</a>
+                        <a [routerLink]="['/register']" class="register-link">Créer un compte</a>
                     </p>
                 </div>
 

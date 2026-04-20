@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -17,7 +19,7 @@ export class LoginComponent {
   messageError: string = '';
 
   // URL vers ton backend Spring Boot
-  private apiUrl = 'http://localhost:8080/users/login';
+  private apiUrl = `${environment.apiUrl}/users/login`;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -32,7 +34,7 @@ export class LoginComponent {
 
   this.http.post<any>(this.apiUrl, { username: this.username }).subscribe({
     next: (user: any) => {
-      // SÉCURITÉ : Si le backend renvoie 200 OK mais un objet vide
+      // SÉCURITÉ : Si le backend renvoie 200 OK mais un objet vide 
       if (!user || !user.username) {
         this.loading = false;
         this.messageError = "Utilisateur non trouvé ou données invalides.";
