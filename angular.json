@@ -23,12 +23,11 @@
               "sweetalert2"
             ],
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets",
+              "src/assets/quizify.png"
             ],
-            
+
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"

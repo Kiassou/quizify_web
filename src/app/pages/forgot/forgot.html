@@ -1,13 +1,13 @@
-<div class="login-container">
+<div class="container-fluid bg-forgot">
     <div class="background-circles">
         <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [class]="'circle circle-' + i"></div>
     </div>
 
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row justify-content-center align-items-center min-vh-100">
         <div class="col-11 col-sm-8 col-md-5 col-lg-4">
-            <div class="card login-card animate__animated animate__fadeInUp">
+            <div class="card p-4 shadow-lg forgot-card animate__animated animate__fadeIn">
                 <div class="text-center mt-4">
-                    <h2 class="brand mt-2">Quizify</h2>
+                    <h3 class="brand">Quizify</h3>
                     <p class="tagline">Récupération de compte 🛡️</p>
                 </div>
 
@@ -19,12 +19,12 @@
                             <span class="input-group-text border-0 bg-transparent">
                                 <i class="bi bi-envelope-heart-fill"></i>
                             </span>
-                            <input type="email" class="form-control" placeholder="ton@email.com" [(ngModel)]="email"
+                            <input type="email" class="form-control" placeholder="Entre votre email" [(ngModel)]="email"
                                 name="email" [disabled]="loading">
                         </div>
                     </div>
 
-                    <button class="btn btn-login w-100 mb-4" [disabled]="!email || loading" (click)="sendEmail()">
+                    <button class="btn btn-primary w-100 btn-chic" [disabled]="!email || loading" (click)="sendEmail()">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
                         <span *ngIf="!loading">Envoyer le code <i class="bi bi-send-fill ms-2"></i></span>
                     </button>
@@ -67,7 +67,7 @@
                 Code incorrect, réessaye ! ❌
             </div>
 
-            <button class="btn btn-login-success w-100 mb-2" (click)="verifyCode()" [disabled]="code.length < 6">
+            <button class="btn btn-success w-100 btn-chic" (click)="verifyCode()" [disabled]="code.length < 6">
                 Vérifier le code
             </button>
 
