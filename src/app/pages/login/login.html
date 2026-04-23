@@ -5,6 +5,7 @@
 
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="col-11 col-sm-8 col-md-5 col-lg-4">
+
             <div class="card login-card animate__animated animate__fadeInUp">
 
                 <div class="text-center mt-4">
@@ -22,17 +23,13 @@
                                 <span class="input-group-text border-0 bg-transparent">
                                     <i class="bi bi-person-circle"></i>
                                 </span>
-                                <input type="text" 
-                                       class="form-control" 
-                                       placeholder="Ton pseudo..."
-                                       [(ngModel)]="username" 
-                                       name="username" 
-                                       [disabled]="loading"
-                                       required>
+                                <input type="text" class="form-control" placeholder="Ton pseudo..."
+                                    [(ngModel)]="username" name="username" [disabled]="loading" required>
                             </div>
                         </div>
 
-                        <div *ngIf="messageError" class="alert alert-danger animate__animated animate__shakeX mb-4">
+                        <div *ngIf="messageError && !loading"
+                            class="alert alert-danger animate__animated animate__shakeX mb-4">
                             <i class="bi bi-exclamation-triangle-fill me-2"></i>
                             {{ messageError }}
                         </div>
@@ -42,9 +39,16 @@
                         </div>
 
                         <button type="submit" class="btn btn-login w-100 mb-4" [disabled]="!username || loading">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-                            <span *ngIf="!loading">Prêt à jouer ? <i class="bi bi-rocket-takeoff-fill ms-2"></i></span>
+                            <ng-container *ngIf="!loading">
+                                Prêt à jouer ? <i class="bi bi-rocket-takeoff-fill ms-2"></i>
+                            </ng-container>
+
+                            <ng-container *ngIf="loading">
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                                Connexion...
+                            </ng-container>
                         </button>
+
                     </form>
                 </div>
 
@@ -54,6 +58,7 @@
                         <a [routerLink]="['/register']" class="register-link">Créer un compte</a>
                     </p>
                 </div>
+
             </div>
         </div>
     </div>

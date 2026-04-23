@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -19,16 +19,18 @@ export class LoginComponent {
 
   private apiUrl = `${environment.apiUrl}/users/login`;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private cdr: ChangeDetectorRef // Injecté pour forcer la mise à jour visuelle
+  ) {}
 
   login() {
-    // 1. Validation de base
     if (!this.username.trim()) {
       this.messageError = "Veuillez entrer un nom d'utilisateur.";
       return;
     }
 
-    // 2. Activation du spinner
     this.loading = true;
     this.messageError = '';
 
@@ -36,34 +38,35 @@ export class LoginComponent {
 
     this.http.post<any>(this.apiUrl, { username: this.username }).subscribe({
       next: (user: any) => {
-        // SUCCÈS : On arrête le spinner et on stocke les infos
         this.loading = false;
         
         if (user && user.username) {
           localStorage.setItem('user_token', user.username); 
           localStorage.setItem('currentUser', JSON.stringify(user));
 
-          // Redirection selon le rôle
           if (user.role === 'ADMIN') {
             this.router.navigate(['/home-admin']);
           } else {
             this.router.navigate(['/home-players']);
           }
         }
+        this.cdr.detectChanges(); // Force le rafraîchissement
       },
       error: (err: any) => {
-        // ERREUR : C'est ici qu'on force l'arrêt du spinner
+        // C'est ici que l'on débloque ton interface
         this.loading = false; 
-        console.error("Détails de l'erreur :", err);
+        console.error("Erreur Backend reçue :", err);
 
         if (err.status === 401) {
           this.messageError = "Identifiant inconnu. Réessaie encore ! 🧐";
         } else if (err.status === 0) {
-          this.messageError = "Le serveur est injoignable. Vérifie ta connexion.";
+          this.messageError = "Le serveur est injoignable (Render s'endort parfois).";
         } else {
-          // On affiche le message d'erreur envoyé par le backend s'il existe
-          this.messageError = err.error?.error || "Une erreur inattendue est survenue.";
+          this.messageError = "Une erreur est survenue. Réessaye plus tard.";
         }
+
+        // ABSOLUMENT NÉCESSAIRE : On force Angular à voir que loading est passé à false
+        this.cdr.detectChanges(); 
       }
     });
   }
