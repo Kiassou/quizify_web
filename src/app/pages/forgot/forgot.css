@@ -402,10 +402,10 @@
     justify-content: center;
 }
 
-/* Animation de secousse pour code incorrect */
+/* Animation de secousse si le code est faux */
 .shake-error {
     animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
-    border: 1px solid rgba(255, 0, 0, 0.3) !important;
+    border: 2px solid #ff3b30 !important;
 }
 
 @keyframes shake {
@@ -432,8 +432,18 @@
     }
 }
 
-/* On s'assure que le backdrop de la modal est bien au-dessus et flou */
-
+/* Style de la modale pour qu'elle soit bien au-dessus */
+.modal-backdrop-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    /* Très important pour passer devant tout */
+}
 .modal-backdrop-custom {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(15px) saturate(180%) !important;

@@ -1,27 +1,16 @@
 <div class="login-container">
     <div class="background-circles">
-        <div class="circle circle-1"></div>
-        <div class="circle circle-2"></div>
-        <div class="circle circle-3"></div>
-        <div class="circle circle-4"></div>
-        <div class="circle circle-5"></div>
-        <div class="circle circle-6"></div>
-        <div class="circle circle-7"></div>
-        <div class="circle circle-8"></div>
-        <div class="circle circle-9"></div>
-        <div class="circle circle-10"></div>
+        <div *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [class]="'circle circle-' + i"></div>
     </div>
 
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="col-11 col-sm-8 col-md-5 col-lg-4">
-
             <div class="card login-card animate__animated animate__fadeInUp">
 
                 <div class="text-center mt-4">
                     <h2 class="brand mt-2">Quizify</h2>
                     <p class="tagline text-muted">
-                        <i class="bi bi-stars me-1"></i>
-                        Défie ton intelligence
+                        <i class="bi bi-stars me-1"></i> Défie ton intelligence
                     </p>
                 </div>
 
@@ -33,13 +22,17 @@
                                 <span class="input-group-text border-0 bg-transparent">
                                     <i class="bi bi-person-circle"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Ton pseudo..."
-                                    [(ngModel)]="username" name="username" required>
+                                <input type="text" 
+                                       class="form-control" 
+                                       placeholder="Ton pseudo..."
+                                       [(ngModel)]="username" 
+                                       name="username" 
+                                       [disabled]="loading"
+                                       required>
                             </div>
                         </div>
 
-                        <div *ngIf="messageError" class="alert alert-danger animate__animated animate__shakeX mb-4"
-                            style="background: rgba(255, 59, 48, 0.2); border: 1px solid #ff3b30; color: white; border-radius: 12px; font-size: 0.85rem;">
+                        <div *ngIf="messageError" class="alert alert-danger animate__animated animate__shakeX mb-4">
                             <i class="bi bi-exclamation-triangle-fill me-2"></i>
                             {{ messageError }}
                         </div>
@@ -52,7 +45,6 @@
                             <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
                             <span *ngIf="!loading">Prêt à jouer ? <i class="bi bi-rocket-takeoff-fill ms-2"></i></span>
                         </button>
-
                     </form>
                 </div>
 
@@ -62,7 +54,6 @@
                         <a [routerLink]="['/register']" class="register-link">Créer un compte</a>
                     </p>
                 </div>
-
             </div>
         </div>
     </div>

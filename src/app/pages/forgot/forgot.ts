@@ -14,16 +14,18 @@ import { finalize } from 'rxjs';
   templateUrl: './forgot.html',
   styleUrls: ['./forgot.css']
 })
+
+
+// ... (imports inchangés)
+
 export class ForgotComponent {
   email: string = '';
   code: string = '';
   loading: boolean = false;
   showModal: boolean = false;
-  isError: boolean = false; 
+  errorInCode: boolean = false; // On garde uniquement celle-ci
 
-  // ✅ CORRECTION : On s'arrête à /users pour que les méthodes ajoutent leurs propres chemins
   private apiUrl = `${environment.apiUrl}/users`;
-errorInCode: any;
 
   constructor(
     private http: HttpClient, 
@@ -33,25 +35,26 @@ errorInCode: any;
 
   sendEmail() {
     if (!this.email.trim()) return;
-    
     this.loading = true;
 
     this.http.post(`${this.apiUrl}/send-code`, null, { 
       params: { email: this.email },
       responseType: 'text' 
     }).pipe(
-      finalize(() => this.loading = false)
+      finalize(() => {
+        this.loading = false;
+        this.cdr.detectChanges(); // Sécurité pour le spinner sur mobile
+      })
     ).subscribe({
       next: () => {
         this.showModal = true;
-        this.cdr.detectChanges(); 
       },
       error: (err) => {
         console.error("Erreur sendEmail:", err);
         Swal.fire({
           icon: 'error',
           title: 'Oups...',
-          text: 'Email introuvable ou erreur serveur. Vérifie ton adresse !',
+          text: 'Email introuvable ou erreur serveur.',
           confirmButtonColor: '#e73c7e'
         });
       }
@@ -60,15 +63,13 @@ errorInCode: any;
 
   verifyCode() {
     if (!this.code.trim()) return;
-    
-    this.isError = false; 
+    this.errorInCode = false; 
 
     this.http.post<any>(`${this.apiUrl}/verify-code`, null, {
       params: { email: this.email, code: this.code }
     }).subscribe({
       next: (user) => {
         this.showModal = false;
-
         Swal.fire({
           title: `Bonjour ${user.prenom || 'joueur'} ! 👋`,
           html: `Heureux de vous revoir.<br>Votre pseudo de jeu est : <br><b style="color:#23a6d5; font-size:1.6rem; letter-spacing:1px;">${user.username}</b>`,
@@ -76,22 +77,18 @@ errorInCode: any;
           background: 'rgba(255, 255, 255, 0.98)',
           backdrop: `rgba(0,0,0,0.4) blur(4px)`,
           confirmButtonText: 'Retourner au Login',
-          confirmButtonColor: '#23a6d5',
-          showClass: {
-            popup: 'animate__animated animate__zoomIn'
-          }
-        }).then((result) => {
-          if (result.isConfirmed || result.isDismissed) {
-            this.router.navigate(['/login']);
-          }
+          confirmButtonColor: '#23a6d5'
+        }).then(() => {
+          this.router.navigate(['/login']);
         });
       },
       error: (err) => {
         console.error("Erreur verifyCode:", err);
-        this.isError = true; // Déclenche la vibration dans le HTML
+        this.errorInCode = true; // ✅ On utilise bien la variable du HTML
         
+        // On retire l'erreur après 600ms pour pouvoir re-déclencher l'animation
         setTimeout(() => { 
-          this.isError = false; 
+          this.errorInCode = false; 
         }, 600);
       }
     });
@@ -100,6 +97,6 @@ errorInCode: any;
   closeModal() {
     this.showModal = false;
     this.code = '';
-    this.isError = false;
+    this.errorInCode = false;
   }
 }
