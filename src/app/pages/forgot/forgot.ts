@@ -16,22 +16,16 @@ import { finalize } from 'rxjs';
 })
 
 
-// ... (imports inchangés)
-
 export class ForgotComponent {
   email: string = '';
   code: string = '';
   loading: boolean = false;
   showModal: boolean = false;
-  errorInCode: boolean = false; // On garde uniquement celle-ci
+  errorInCode: boolean = false;
 
   private apiUrl = `${environment.apiUrl}/users`;
 
-  constructor(
-    private http: HttpClient, 
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private http: HttpClient, private router: Router, private cdr: ChangeDetectorRef) {}
 
   sendEmail() {
     if (!this.email.trim()) return;
@@ -43,27 +37,27 @@ export class ForgotComponent {
     }).pipe(
       finalize(() => {
         this.loading = false;
-        this.cdr.detectChanges(); // Sécurité pour le spinner sur mobile
+        this.cdr.detectChanges();
       })
     ).subscribe({
       next: () => {
+        this.code = ''; // On vide le code avant d'ouvrir la modal
         this.showModal = true;
       },
       error: (err) => {
-        console.error("Erreur sendEmail:", err);
         Swal.fire({
           icon: 'error',
-          title: 'Oups...',
-          text: 'Email introuvable ou erreur serveur.',
-          confirmButtonColor: '#e73c7e'
+          title: 'Utilisateur inconnu',
+          text: 'Cet email n\'existe pas dans notre base de données. ✨',
+          confirmButtonColor: '#23a6d5'
         });
       }
     });
   }
 
   verifyCode() {
-    if (!this.code.trim()) return;
-    this.errorInCode = false; 
+    if (this.code.length < 6) return;
+    this.errorInCode = false;
 
     this.http.post<any>(`${this.apiUrl}/verify-code`, null, {
       params: { email: this.email, code: this.code }
@@ -71,25 +65,17 @@ export class ForgotComponent {
       next: (user) => {
         this.showModal = false;
         Swal.fire({
-          title: `Bonjour ${user.prenom || 'joueur'} ! 👋`,
-          html: `Heureux de vous revoir.<br>Votre pseudo de jeu est : <br><b style="color:#23a6d5; font-size:1.6rem; letter-spacing:1px;">${user.username}</b>`,
+          title: `Bien joué ${user.prenom} !`,
+          html: `Voici ton pseudo : <br><b style="color:#23a6d5; font-size:1.8rem;">${user.username}</b>`,
           icon: 'success',
-          background: 'rgba(255, 255, 255, 0.98)',
-          backdrop: `rgba(0,0,0,0.4) blur(4px)`,
-          confirmButtonText: 'Retourner au Login',
-          confirmButtonColor: '#23a6d5'
-        }).then(() => {
-          this.router.navigate(['/login']);
-        });
+          confirmButtonText: 'C\'est parti !',
+          confirmButtonColor: '#23d5ab'
+        }).then(() => this.router.navigate(['/login']));
       },
-      error: (err) => {
-        console.error("Erreur verifyCode:", err);
-        this.errorInCode = true; // ✅ On utilise bien la variable du HTML
-        
-        // On retire l'erreur après 600ms pour pouvoir re-déclencher l'animation
-        setTimeout(() => { 
-          this.errorInCode = false; 
-        }, 600);
+      error: () => {
+        this.errorInCode = true;
+        this.code = ''; // On réinitialise pour retaper
+        setTimeout(() => { this.errorInCode = false; this.cdr.detectChanges(); }, 1000);
       }
     });
   }

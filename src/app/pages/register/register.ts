@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http'; 
 import { RouterModule, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { finalize } from 'rxjs'; // Ajout pour sécuriser le spinner
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -22,15 +22,19 @@ export class RegisterComponent {
   loading: boolean = false;
   messageSuccess: string = '';
   messageError: string = '';
+  isShake: boolean = false;
 
-  // ✅ CORRECTION : L'URL doit pointer vers /register et non /login
   private apiUrl = `${environment.apiUrl}/users/register`;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   register() {
     if (!this.nom.trim() || !this.prenom.trim() || !this.username.trim() || !this.email.trim()) {
-      this.messageError = "Tous les champs sont obligatoires ! 📋";
+      this.triggerError("Tous les champs sont requis ! 📋");
       return;
     }
 
@@ -47,33 +51,45 @@ export class RegisterComponent {
     };
 
     this.http.post<any>(this.apiUrl, userData)
-      .pipe(
-        // Sécurité : Quoi qu'il arrive, on arrête le spinner à la fin
-        finalize(() => this.loading = false)
-      )
+      .pipe(finalize(() => {
+        this.loading = false;
+        this.cdr.detectChanges();
+      }))
       .subscribe({
-        next: (response: any) => {
-          this.messageSuccess = "Compte créé avec succès ! Redirection... 🚀";
-          this.resetForm();
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 2500);
+        next: () => {
+          this.messageSuccess = "Bienvenue dans l'aventure Quizify ! 🚀";
+          this.cdr.detectChanges();
+          setTimeout(() => this.router.navigate(['/login']), 2500);
         },
-        error: (err: any) => {
-          console.error("Erreur d'inscription :", err);
-          if (err.status === 400 || err.status === 409) {
-            this.messageError = "Ce pseudo ou cet email est déjà utilisé. 🧐";
-          } else {
-            this.messageError = "Le serveur ne répond pas correctement. Réessaye !";
-          }
+        error: (err) => {
+          console.error(err);
+          const msg = (err.status === 409 || err.status === 400) 
+            ? "Pseudo ou Email déjà utilisé... 🧐" 
+            : "Le serveur boude, réessaye plus tard ! 🛠️";
+          this.triggerError(msg);
         }
       });
   }
 
-  private resetForm() {
-    this.nom = '';
-    this.prenom = '';
-    this.username = '';
-    this.email = '';
+  private triggerError(msg: string) {
+    this.messageError = msg;
+    this.isShake = true;
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.messageError = '';
+      this.isShake = false;
+      this.cdr.detectChanges();
+    }, 3500);
+  }
+
+  // Petit bonus : calcul du pourcentage de complétion du formulaire
+  get formProgress(): number {
+    let count = 0;
+    if (this.nom.trim()) count++;
+    if (this.prenom.trim()) count++;
+    if (this.username.trim()) count++;
+    if (this.email.trim()) count++;
+    return (count / 4) * 100;
   }
 }

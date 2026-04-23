@@ -16,13 +16,13 @@
                 <div class="card-body px-4">
                     <form (ngSubmit)="login()">
                         <div class="mb-4">
-                            <label class="form-label custom-label">Identifiant de jeu</label>
+                            <label class="form-label custom-label">Nom d'utilisateur</label>
                             <div class="input-group custom-input-group" [class.input-error]="isShake">
                                 <span class="input-group-text border-0 bg-transparent">
                                     <i class="bi bi-person-badge-fill"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="Ton pseudo..."
-                                    [(ngModel)]="username" name="username" [disabled]="loading" autocomplete="off">
+                                    [(ngModel)]="username" name="username" [disabled]="loading" autocomplete="off" required>
                             </div>
                         </div>
 
@@ -36,7 +36,7 @@
 
                         <button type="submit" class="btn btn-login w-100 mb-4"
                             [disabled]="!username && !loading || loading">
-                            <span *ngIf="!loading">Lancer la partie <i class="bi bi-play-fill ms-2"></i></span>
+                            <span *ngIf="!loading">Prêt à jouer ? <i class="bi bi-rocket-takeoff-fill ms-2"></i></span>
                             <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
                         </button>
                     </form>
