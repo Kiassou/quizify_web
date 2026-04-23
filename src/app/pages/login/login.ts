@@ -16,58 +16,61 @@ export class LoginComponent {
   username: string = '';
   loading: boolean = false;
   messageError: string = '';
+  isShake: boolean = false; // Pour l'effet "chic" de secousse
 
   private apiUrl = `${environment.apiUrl}/users/login`;
 
   constructor(
     private http: HttpClient, 
     private router: Router,
-    private cdr: ChangeDetectorRef // Injecté pour forcer la mise à jour visuelle
+    private cdr: ChangeDetectorRef
   ) {}
 
   login() {
     if (!this.username.trim()) {
-      this.messageError = "Veuillez entrer un nom d'utilisateur.";
+      this.triggerError("Le pseudo ne peut pas être vide ! 🛑");
       return;
     }
 
     this.loading = true;
     this.messageError = '';
-
-    console.log("Tentative de connexion vers :", this.apiUrl);
+    this.isShake = false;
 
     this.http.post<any>(this.apiUrl, { username: this.username }).subscribe({
       next: (user: any) => {
         this.loading = false;
-        
         if (user && user.username) {
           localStorage.setItem('user_token', user.username); 
           localStorage.setItem('currentUser', JSON.stringify(user));
-
-          if (user.role === 'ADMIN') {
-            this.router.navigate(['/home-admin']);
-          } else {
-            this.router.navigate(['/home-players']);
-          }
+          user.role === 'ADMIN' ? this.router.navigate(['/home-admin']) : this.router.navigate(['/home-players']);
         }
-        this.cdr.detectChanges(); // Force le rafraîchissement
+        this.cdr.detectChanges();
       },
       error: (err: any) => {
-        // C'est ici que l'on débloque ton interface
-        this.loading = false; 
-        console.error("Erreur Backend reçue :", err);
-
-        if (err.status === 401) {
-          this.messageError = "Identifiant inconnu. Réessaie encore ! 🧐";
-        } else if (err.status === 0) {
-          this.messageError = "Le serveur est injoignable (Render s'endort parfois).";
-        } else {
-          this.messageError = "Une erreur est survenue. Réessaye plus tard.";
-        }
-
-        // ABSOLUMENT NÉCESSAIRE : On force Angular à voir que loading est passé à false
-        this.cdr.detectChanges(); 
+        this.loading = false;
+        
+        // Logique d'erreur personnalisée
+        const errorMsg = err.status === 401 
+          ? "Pseudo introuvable... Es-tu inscrit ? 🤔" 
+          : "Connexion impossible au serveur. 🛠️";
+        
+        this.triggerError(errorMsg);
+        this.cdr.detectChanges();
       }
     });
+  }
+
+  // Fonction pour gérer l'affichage temporaire et la réinitialisation
+  private triggerError(msg: string) {
+    this.messageError = msg;
+    this.isShake = true; // Active l'animation CSS
+    this.username = ''; // Réinitialisation immédiate du champ
+
+    // On retire le message et l'effet après 3 secondes
+    setTimeout(() => {
+      this.messageError = '';
+      this.isShake = false;
+      this.cdr.detectChanges();
+    }, 3000);
   }
 }

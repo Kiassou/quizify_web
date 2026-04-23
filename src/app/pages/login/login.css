@@ -345,3 +345,67 @@
     color: #23a6d5;
     text-shadow: 0 0 8px rgba(35, 166, 213, 0.2);
 }
+
+/* Animation de secousse */
+.shake-card {
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* Style de l'alerte chic */
+.alert-chic {
+    background: rgba(255, 69, 58, 0.15);
+    color: #ff453a;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 69, 58, 0.3);
+}
+
+/* Bordure d'input en cas d'erreur */
+.input-error {
+    border-color: #ff453a !important;
+    box-shadow: 0 0 10px rgba(255, 69, 58, 0.2) !important;
+}
+
+/* On personnalise un peu le bouton pour le rendre plus "Quizify" */
+.btn-login {
+    background: linear-gradient(45deg, #23a6d5, #23d5ab);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 15px;
+    transition: transform 0.2s;
+}
+
+.btn-login:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(35, 166, 213, 0.3);
+}

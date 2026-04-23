@@ -6,59 +6,47 @@
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="col-11 col-sm-8 col-md-5 col-lg-4">
 
-            <div class="card login-card animate__animated animate__fadeInUp">
+            <div class="card login-card animate__animated animate__fadeInUp" [class.shake-card]="isShake">
 
                 <div class="text-center mt-4">
                     <h2 class="brand mt-2">Quizify</h2>
-                    <p class="tagline text-muted">
-                        <i class="bi bi-stars me-1"></i> Défie ton intelligence
-                    </p>
+                    <p class="tagline">Défie ton intelligence ✨</p>
                 </div>
 
                 <div class="card-body px-4">
                     <form (ngSubmit)="login()">
                         <div class="mb-4">
-                            <label class="form-label custom-label">Nom d'utilisateur</label>
-                            <div class="input-group custom-input-group">
+                            <label class="form-label custom-label">Identifiant de jeu</label>
+                            <div class="input-group custom-input-group" [class.input-error]="isShake">
                                 <span class="input-group-text border-0 bg-transparent">
-                                    <i class="bi bi-person-circle"></i>
+                                    <i class="bi bi-person-badge-fill"></i>
                                 </span>
                                 <input type="text" class="form-control" placeholder="Ton pseudo..."
-                                    [(ngModel)]="username" name="username" [disabled]="loading" required>
+                                    [(ngModel)]="username" name="username" [disabled]="loading" autocomplete="off">
                             </div>
                         </div>
 
-                        <div *ngIf="messageError && !loading"
-                            class="alert alert-danger animate__animated animate__shakeX mb-4">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div *ngIf="messageError" class="alert-chic animate__animated animate__fadeIn">
                             {{ messageError }}
                         </div>
 
                         <div class="text-end mb-4">
-                            <a [routerLink]="['/forgot']" class="forgot-link">Pseudo oublié ?</a>
+                            <a [routerLink]="['/forgot']" class="forgot-link">Pseudo perdu ?</a>
                         </div>
 
-                        <button type="submit" class="btn btn-login w-100 mb-4" [disabled]="!username || loading">
-                            <ng-container *ngIf="!loading">
-                                Prêt à jouer ? <i class="bi bi-rocket-takeoff-fill ms-2"></i>
-                            </ng-container>
-
-                            <ng-container *ngIf="loading">
-                                <span class="spinner-border spinner-border-sm me-2"></span>
-                                Connexion...
-                            </ng-container>
+                        <button type="submit" class="btn btn-login w-100 mb-4"
+                            [disabled]="!username && !loading || loading">
+                            <span *ngIf="!loading">Lancer la partie <i class="bi bi-play-fill ms-2"></i></span>
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
                         </button>
-
                     </form>
                 </div>
 
                 <div class="card-footer bg-transparent border-0 text-center pb-4">
-                    <p class="mb-0 text-muted">
-                        Nouveau ici ?
-                        <a [routerLink]="['/register']" class="register-link">Créer un compte</a>
+                    <p class="mb-0 text-muted small">Pas encore de profil ?
+                        <a [routerLink]="['/register']" class="register-link fw-bold">Rejoins-nous</a>
                     </p>
                 </div>
-
             </div>
         </div>
     </div>
