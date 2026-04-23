@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -12,25 +12,24 @@ import Swal from 'sweetalert2';
   styleUrls: ['./home-players.css']
 })
 export class HomePlayersComponent implements OnInit {
-getCategoryColor(arg0: string) {
-throw new Error('Method not implemented.');
-}
+  // Variables existantes
   unreadNotifications = 5;
   searchQuery: string = '';
-  userName: string = 'Joueur'; // Valeur par défaut
-  activeModal: string | null = null; // 'profile', 'notifications', 'settings' ou null
+  userName: string = 'Joueur';
+  activeModal: string | null = null;
   
-  // Statistiques (peuvent être récupérées via un service plus tard)
+  // NOUVELLES variables pour responsive
+  isMobile = false;
+  searchExpanded = false;
+  dropdownOpen = false;
+  
+  // Statistiques
   stats = {
     points: 1250,
     rank: 4,
     completed: 15
   };
 
-  // Liste des quiz avec ID (obligatoire pour le routerLink et la compilation)
-  get recentQuizzesLimit() {
-  return this.recentQuizzes.slice(0, 4);
-}
   recentQuizzes = [
     { 
       id: 1, 
@@ -63,84 +62,123 @@ throw new Error('Method not implemented.');
   ];
 
   categories = ['Tous', 'Sciences', 'Tech', 'Histoire', 'Sport'];
+  weekDays: any[] = [];
+  todayIndex: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit() {
-    // Récupération des infos utilisateur stockées au moment du Login
     const userData = localStorage.getItem('user');
     if (userData) {
       const user = JSON.parse(userData);
-      // On affiche le nom s'il existe, sinon le pseudo
       this.userName = user.nom || user.username || 'Kiassou';
     }
     
     this.generateWeek();
+    this.checkMobile();
   }
 
-  // Dans ta classe de composant
-  weekDays: any[] = [];
-  todayIndex: number = 0;
+  // ✅ GESTION RESPONSIVE
+  @HostListener('window:resize')
+  checkMobile() {
+    this.isMobile = window.innerWidth <= 768;
+    if (!this.isMobile) {
+      this.searchExpanded = false; // Ferme la recherche sur desktop
+    }
+  }
 
+  // ✅ Toggle recherche mobile
+  toggleSearch() {
+    this.searchExpanded = !this.searchExpanded;
+  }
+
+  // ✅ Toggle dropdown
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  // ✅ Ferme dropdown en cliquant ailleurs
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!this.elementRef.nativeElement.contains(target)) {
+      this.dropdownOpen = false;
+    }
+  }
+
+  get recentQuizzesLimit() {
+    return this.recentQuizzes.slice(0, 4);
+  }
 
   generateWeek() {
     const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
     const today = new Date().getDay(); 
-    // getDay() donne 0 pour Dimanche, on le réajuste pour que Dimanche soit le 7ème jour (index 6)
     this.todayIndex = today === 0 ? 6 : today - 1;
 
     this.weekDays = days.map((label, index) => ({
-        label: label,
-        isPast: index < this.todayIndex,
-        isToday: index === this.todayIndex,
-        isFuture: index > this.todayIndex,
-        dayNum: index + 1 // Utile pour envoyer vers la page défi
+      label: label,
+      isPast: index < this.todayIndex,
+      isToday: index === this.todayIndex,
+      isFuture: index > this.todayIndex,
+      dayNum: index + 1
     }));
- }
+  }
 
- 
-  // Méthodes pour ouvrir/fermer les modals
+  // ✅ Modals corrigés
   openModal(type: string) {
     this.activeModal = type;
+    this.dropdownOpen = false; // Ferme le dropdown
+    this.searchExpanded = false; // Ferme la recherche
+    document.body.classList.add('modal-open');
   }
 
   closeModal() {
     this.activeModal = null;
+    document.body.classList.remove('modal-open');
   }
 
-  /**
-   * Logique de déconnexion chic avec SweetAlert2
-   */
+  // ✅ Logout avec fermeture propre
   logout() {
+    this.dropdownOpen = false;
     Swal.fire({
       title: 'Déconnexion',
       text: "Voulez-vous vraiment vous déconnecter ?",
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#e73c7e', // Couleur chic (accent)
-      cancelButtonColor: '#23a6d5',  // Couleur chic (primary)
+      confirmButtonColor: '#e73c7e',
+      cancelButtonColor: '#23a6d5',
       confirmButtonText: 'Oui, quitter',
       cancelButtonText: 'Annuler',
       background: 'rgba(255, 255, 255, 0.95)',
-      backdrop: `rgba(35, 166, 213, 0.4) blur(8px)` // Flou d'arrière-plan
+      backdrop: `rgba(35, 166, 213, 0.4) blur(8px)`
     }).then((result) => {
       if (result.isConfirmed) {
-        // Nettoyage des données de session
         localStorage.clear();
         sessionStorage.clear();
-        
-        // Redirection immédiate
         this.router.navigate(['/login']);
       }
     });
   }
 
-  /**
-   * Méthode pour filtrer les quiz (optionnel pour la barre de recherche)
-   */
   get filteredQuizzes() {
     return this.recentQuizzes.filter(quiz => 
       quiz.title.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
+  }
+
+  // Méthode manquante
+  getCategoryColor(category: string): string {
+    const colors: { [key: string]: string } = {
+      'Tech': '#e73c7e',
+      'Histoire': '#23a6d5',
+      'Maths': '#f39c12',
+      'Sciences': '#27ae60',
+      'Sport': '#9b59b6'
+    };
+    return colors[category] || '#3498db';
   }
 }
