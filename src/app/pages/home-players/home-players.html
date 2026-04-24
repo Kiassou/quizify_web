@@ -4,19 +4,6 @@
         <div class="nav-left">
             <h2 class="brand-logo">Quizify<span>.</span></h2>
         </div>
-
-        <!-- Barre de recherche responsive -->
-        <div class="search-container">
-            <div class="search-bar-glass" [class.search-collapsed]="isMobile && !searchExpanded">
-                <i class="bi bi-search"></i>
-                <input type="text" [(ngModel)]="searchQuery" placeholder="Trouver un défi..."
-                    [class.input-visible]="!isMobile || searchExpanded">
-            </div>
-            <button class="search-toggle-btn" *ngIf="isMobile" (click)="toggleSearch()">
-                <i class="bi" [class]="searchExpanded ? 'bi-x-lg' : 'bi-search'"></i>
-            </button>
-        </div>
-
         <!-- Actions droite responsive -->
         <div class="nav-right">
             <!-- Notifications responsive -->
@@ -38,7 +25,7 @@
                     <div class="dropdown-header-chic">
                         <div class="user-meta">
                             <strong>{{ userName }}</strong>
-                            <span class="status-badge"><i class="bi bi-patch-check-fill"></i> Joueur Élite</span>
+                            <span class="status-badge"><i class="bi bi-patch-check-fill"></i></span>
                         </div>
                     </div>
 
