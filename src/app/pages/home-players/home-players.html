@@ -44,7 +44,7 @@
 
                     <div class="dropdown-body">
                         <!-- Table pour alignement parfait -->
-                        <table class="dropdown-menu-table">
+                        <table class="dropdown-menu-table" style="cursor: pointer;">
                             <tr (click)="openModal('profil')">
                                 <td class="icon-cell">
                                     <div class="icon-circle bg-profile"><i class="bi bi-person-badge"></i></div>
@@ -204,7 +204,156 @@
                     </div>
 
                     <!-- Autres cards sidebar... (Expertises, Défis) -->
+                    <div class="card-glass-sidebar mt-4 animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="m-0 chic-title">Expertises</h5>
+                            <span class="ach-count">2/4</span>
+                        </div>
+                    
+                        <div class="achievements-grid-chic">
+                            <div class="ach-item active-ach ach-tech" title="Maître de la Tech">
+                                <div class="ach-icon-wrapper">
+                                    <i class="bi bi-cpu"></i>
+                                    <div class="ach-glow"></div>
+                                </div>
+                            </div>
+                    
+                            <div class="ach-item active-ach ach-histoire" title="Explorateur d'Histoire">
+                                <div class="ach-icon-wrapper">
+                                    <i class="bi bi-bank"></i>
+                                    <div class="ach-glow"></div>
+                                </div>
+                            </div>
+                    
+                            <div class="ach-item locked-ach" title="Compléter un quiz Sciences pour débloquer">
+                                <div class="ach-icon-wrapper">
+                                    <i class="bi bi-microscope"></i>
+                                    <i class="bi bi-lock-fill lock-overlay"></i>
+                                </div>
+                            </div>
+                    
+                            <div class="ach-item locked-ach" title="Compléter un quiz Sport pour débloquer">
+                                <div class="ach-icon-wrapper">
+                                    <i class="bi bi-trophy"></i>
+                                    <i class="bi bi-lock-fill lock-overlay"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-glass-sidebar mt-4 animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
+                        <div class="mb-3">
+                            <h5 class="m-0 chic-title">Défis Hebdomadaires</h5>
+                            <p class="small text-white-50">Relève le défi pour garder ton rythme !</p>
+                        </div>
+                    
+                        <div class="challenge-days-container">
+                            <div class="day-item" *ngFor="let day of weekDays" [class.day-today]="day.isToday" [class.day-past]="day.isPast"
+                                [routerLink]="['/challenge', day.dayNum]">
+                    
+                                <div class="day-circle-wrapper">
+                                    <div class="today-ring" *ngIf="day.isToday"></div>
+                    
+                                    <div class="day-circle">
+                                        <i class="bi" [ngClass]="day.isPast ? 'bi-check-lg' : 'bi-lightning-charge'"></i>
+                                    </div>
+                                </div>
+                                <span class="day-label">{{ day.label }}</span>
+                            </div>
+                        </div>
+                    
+                        <div class="mt-3 p-2 challenge-info-box">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <span>Aujourd'hui : <strong>Défi Mystère</strong> (+50 XP)</span>
+                        </div>
+                    </div>
+                    <!-- --- NOUVEAU : Card Quiz du Moment (avec animation unique) --- -->
+                    <div class="sidebar-card quiz-du-moment">
+                        <div class="quiz-icon-special">
+                            <div class="star-shine"></div>
+                            <i class="bi bi-fire"></i>
+                        </div>
+
+                        <div class="quiz-info-special">
+                            <span class="quiz-category-special">🔥 Défi du Jour</span>
+                            <h5 class="quiz-title-special">La Vitesse de la Lumière</h5>
+                            <p class="quiz-description-special">Testez vos connaissances sur les bases de la physique
+                                moderne. 500 XP à gagner !</p>
+
+                            <div class="quiz-stats-special">
+                                <span class="stat-item-special">
+                                    <i class="bi bi-clock"></i> 10 min
+                                </span>
+                                <span class="stat-item-special">
+                                    <i class="bi bi-question-circle"></i> 10 Q
+                                </span>
+                                <span class="stat-item-special text-warning fw-bold">
+                                    <i class="bi bi-star-fill"></i> 500
+                                </span>
+                            </div>
+
+                            <button class="btn-start-quiz-special">
+                                <i class="bi bi-play-circle"></i> Commencer maintenant
+                            </button>
+                        </div>
+                    </div>
+                    <!-- --- NOUVEAU : Card 2 - Catégorie Aléatoire (2x plus grande) --- -->
+                    <div class="sidebar-card quiz-aleatoire">
+                        <div class="quiz-icon-aleatoire">
+                            <i class="bi bi-shuffle"></i>
+                        </div>
+
+                        <div class="quiz-info-aleatoire">
+                            <span class="quiz-category-aleatoire">🎲 Aléatoire</span>
+                            <h5 class="quiz-title-aleatoire">Culture Générale</h5>
+                            <p class="quiz-description-aleatoire">20 questions surprises sur tous les sujets possibles. Le meilleur moyen de tester vos connaissances éclectiques.</p>
+
+                            <div class="quiz-stats-aleatoire">
+                                <span class="stat-item-aleatoire">
+                                    <i class="bi bi-clock"></i> 15 min
+                                </span>
+                                <span class="stat-item-aleatoire">
+                                    <i class="bi bi-question-circle"></i> 20 Q
+                                </span>
+                                <span class="stat-item-aleatoire text-success fw-bold">
+                                    <i class="bi bi-star-fill"></i> 1000
+                                </span>
+                            </div>
+
+                            <button class="btn-start-quiz-aleatoire">
+                                <i class="bi bi-play-circle"></i> Lancer le défi
+                            </button>
+                        </div>
+                    </div>
                     <!-- [Reste du contenu sidebar inchangé] -->
+                    <!-- --- NOUVEAU : Card 3 --- -->
+                    <div class="sidebar-card quiz-aleatoire">
+                        <div class="quiz-icon-aleatoire">
+                            <i class="bi bi-shuffle"></i>
+                        </div>
+
+                        <div class="quiz-info-aleatoire">
+                            <span class="quiz-category-aleatoire">🎲 Aléatoire</span>
+                            <h5 class="quiz-title-aleatoire">Culture Générale</h5>
+                            <p class="quiz-description-aleatoire">20 questions surprises sur tous les sujets possibles. Le meilleur moyen de tester vos connaissances éclectiques.</p>
+
+                            <div class="quiz-stats-aleatoire">
+                                <span class="stat-item-aleatoire">
+                                    <i class="bi bi-clock"></i> 15 min
+                                </span>
+                                <span class="stat-item-aleatoire">
+                                    <i class="bi bi-question-circle"></i> 20 Q
+                                </span>
+                                <span class="stat-item-aleatoire text-success fw-bold">
+                                    <i class="bi bi-star-fill"></i> 1000
+                                </span>
+                            </div>
+
+                            <button class="btn-start-quiz-aleatoire">
+                                <i class="bi bi-play-circle"></i> Lancer le défi
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -232,12 +381,124 @@
                 <!-- Contenu des modals [inchangé] -->
                 <div *ngIf="activeModal === 'profil'" class="profile-mini-content">
                     <!-- Contenu profil -->
+                    <div class="profile-mini-content">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-circle-large me-3">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold mb-1">{{userName}}</h3>
+                                <p class="text-muted mb-0">
+                                    <span class="badge bg-warning text-dark"><i class="bi bi-star-fill me-1"></i>
+                                        Joueur Élite</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <div class="d-flex justify-content-between text-center mb-3">
+                            <div>
+                                <div class="text-primary fw-bold fs-4">{{stats.points}}</div>
+                                <div class="text-muted small">Points</div>
+                            </div>
+                            <div>
+                                <div class="text-primary fw-bold fs-4">#{{stats.rank}}</div>
+                                <div class="text-muted small">Classement</div>
+                            </div>
+                            <div>
+                                <div class="text-primary fw-bold fs-4">{{stats.completed}}</div>
+                                <div class="text-muted small">Quizzes</div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline-secondary w-100 mb-3">
+                            <i class="bi bi-pencil-square me-1"></i> Modifier mon profil
+                        </button>
+
+                        <h6 class="mb-3">Mes dernières aventures</h6>
+
+                        <div class="list-group list-group-flush">
+                            <a
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>JavaScript Moderne</span>
+                                <span class="badge bg-success">Terminé</span>
+                            </a>
+                            <a
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>Histoire de l'Afrique</span>
+                                <span class="badge bg-warning">En cours</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf="activeModal === 'settings'" class="settings-mini-content">
                     <!-- Contenu settings -->
+                    <div>
+                        <h5 class="mb-4 text-center">Paramètres du compte</h5>
+
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Langue</label>
+                            <select class="form-select form-select-sm" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                                <option style="background: #23a6d5; color: white;">Français (FR)</option>
+                                <option style="background: #23a6d5; color: white;">English (EN)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Notifications</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                                <label class="form-check-label small" for="flexSwitchCheckDefault">Activer les notifications</label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline-secondary w-100 btn-sm mb-3">
+                            <i class="bi bi-key me-1"></i> Changer le pseudo
+                        </button>
+
+                        <button class="btn btn-outline-danger w-100 btn-sm mt-2">
+                            <i class="bi bi-box-arrow-left me-1"></i> Déconnexion
+                        </button>
+                    </div>
                 </div>
                 <div *ngIf="activeModal === 'help'" class="help-mini-content text-center">
                     <!-- Contenu help -->
+                    <!-- Contenu help (Correctif de mise en page) -->
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <div style="width: 80px; height: 80px; background: rgba(35, 166, 213, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <i class="bi bi-question-circle" style="font-size: 40px; color: #23a6d5;"></i>
+                            </div>
+                            <h5 class="fw-bold">Besoin d'aide ?</h5>
+                            <p class="text-muted small">Trouvez rapidement des réponses à vos questions.</p>
+                        </div>
+
+                        <div class="list-group list-group-flush" style="text-align: left;">
+                            <a href="#" class="list-group-item list-group-item-action" style="background: transparent; color: white; border-color: rgba(255,255,255,0.1);">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Comment créer mon premier quiz ?</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="background: transparent; color: white; border-color: rgba(255,255,255,0.1);">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Quels sont les avantages du mode défi ?</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action" style="background: transparent; color: white; border-color: rgba(255,255,255,0.1);">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Comment fonctionnent les classements ?</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <button class="btn btn-outline-secondary btn-sm mt-4">
+                            <i class="bi bi-headset me-1"></i> Contacter le support
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

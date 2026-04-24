@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-home-player',
@@ -15,7 +16,7 @@ export class HomePlayersComponent implements OnInit {
   // Variables existantes
   unreadNotifications = 5;
   searchQuery: string = '';
-  userName: string = 'Joueur';
+  userName: string = '';
   activeModal: string | null = null;
   
   // NOUVELLES variables pour responsive
@@ -64,23 +65,44 @@ export class HomePlayersComponent implements OnInit {
   categories = ['Tous', 'Sciences', 'Tech', 'Histoire', 'Sport'];
   weekDays: any[] = [];
   todayIndex: number = 0;
+  authService: any;
 
   constructor(
     private router: Router,
     private renderer: Renderer2,
     private elementRef: ElementRef
-  ) {}
+  ) {
+    this.authService = new AuthService();
+  }
 
-  ngOnInit() {
+ ngOnInit() {
+    // 1. On récupère d'abord ce qu'on a en cache pour l'affichage immédiat
     const userData = localStorage.getItem('user');
     if (userData) {
-      const user = JSON.parse(userData);
-      this.userName = user.nom || user.username || 'Kiassou';
+        const user = JSON.parse(userData);
+        this.userName = user.nom || user.username || 'Joueur';
     }
-    
+
+    // 2. SURTOUT : On demande au serveur les infos réelles du Player
+    // Puisque tu es sur Spring Boot, appelle ton endpoint /profile ou /player/me
+    this.authService.getCurrentPlayer().subscribe({
+        next: (player: { username: string; }) => {
+            this.userName = player.username;
+            /*this.userXP = player.xp;
+            this.userLevel = player.level;
+            this.streakCount = player.dailyStreak;
+            this.totalXP = player.xp;
+            this.completedQuizzes = player.completedQuizzes;*/
+            
+            // On met à jour le localStorage pour la prochaine fois
+            localStorage.setItem('user', JSON.stringify(player));
+        },
+        error: (err: any) => console.error("Impossible de charger le profil du joueur", err)
+    });
+
     this.generateWeek();
     this.checkMobile();
-  }
+}
 
   // ✅ GESTION RESPONSIVE
   @HostListener('window:resize')
