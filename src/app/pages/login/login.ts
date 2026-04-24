@@ -41,7 +41,7 @@ export class LoginComponent {
         this.loading = false;
         if (user && user.username) {
           localStorage.setItem('user_token', user.username); 
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('user', JSON.stringify(user));
           user.role === 'ADMIN' ? this.router.navigate(['/home-admin']) : this.router.navigate(['/home-players']);
         }
         this.cdr.detectChanges();

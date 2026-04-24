@@ -75,34 +75,33 @@ export class HomePlayersComponent implements OnInit {
     this.authService = new AuthService();
   }
 
- ngOnInit() {
-    // 1. On récupère d'abord ce qu'on a en cache pour l'affichage immédiat
+  ngOnInit() {
+    // 1. On récupère la clé 'user' (celle définie au login)
     const userData = localStorage.getItem('user');
+    
     if (userData) {
-        const user = JSON.parse(userData);
-        this.userName = user.nom || user.username || 'Joueur';
+        try {
+            const user = JSON.parse(userData);
+            // On vérifie si c'est user.username ou user.nom selon ton API Spring Boot
+            this.userName = user.username || user.nom || 'Joueur';
+        } catch (e) {
+            console.error("Erreur de parsing du localStorage", e);
+        }
     }
 
-    // 2. SURTOUT : On demande au serveur les infos réelles du Player
-    // Puisque tu es sur Spring Boot, appelle ton endpoint /profile ou /player/me
+    // 2. Ton appel API prendra le relais ensuite
     this.authService.getCurrentPlayer().subscribe({
-        next: (player: { username: string; }) => {
-            this.userName = player.username;
-            /*this.userXP = player.xp;
-            this.userLevel = player.level;
-            this.streakCount = player.dailyStreak;
-            this.totalXP = player.xp;
-            this.completedQuizzes = player.completedQuizzes;*/
-            
-            // On met à jour le localStorage pour la prochaine fois
-            localStorage.setItem('user', JSON.stringify(player));
+        next: (player: any) => {
+            if (player && player.username) {
+                this.userName = player.username;
+                localStorage.setItem('user', JSON.stringify(player));
+            }
         },
-        error: (err: any) => console.error("Impossible de charger le profil du joueur", err)
+        error: (err: any) => console.error("Erreur profil", err)
     });
-
     this.generateWeek();
     this.checkMobile();
-}
+  }
 
   // ✅ GESTION RESPONSIVE
   @HostListener('window:resize')

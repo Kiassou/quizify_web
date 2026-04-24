@@ -59,12 +59,6 @@
     cursor: not-allowed;
 }
 
-/* Logo & Branding */
-.logo {
-    width: 70px;
-    animation: bounce 2s infinite;
-}
-
 .brand {
     font-weight: 800;
     background: linear-gradient(to right, #e73c7e, #23a6d5);
@@ -364,7 +358,7 @@
 /* Style des labels et liens */
 .custom-label {
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     color: #555;
     margin-left: 5px;
@@ -421,13 +415,6 @@
     font-size: 0.9rem;
     margin-bottom: 1rem;
     border: 1px solid rgba(35, 213, 171, 0.3);
-}
-
-/* Bouton spécial Inscription */
-.btn-login:disabled {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Animation de vibration si erreur */
