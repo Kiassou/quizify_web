@@ -47,6 +47,105 @@ const scienceQuestions = [
       { text: "L'azote", correct: true },
       { text: "L'hydrogène", correct: false }
     ]
+  },
+  {
+    question: "Quel est le plus grand mammifère terrestre ?",
+    options: [
+      { text: "L'éléphant d'Afrique", correct: true },
+      { text: "La girafe", correct: false },
+      { text: "Le rhinocéros blanc", correct: false },
+      { text: "L'hippopotame", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la formule chimique de l'or ?",
+    options: [
+      { text: "Ag", correct: false },
+      { text: "Au", correct: true },
+      { text: "Fe", correct: false },
+      { text: "Cu", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la planète la plus proche du soleil ?",
+    options: [
+      { text: "Vénus", correct: false },
+      { text: "Mars", correct: false },
+      { text: "Jupiter", correct: false },
+      { text: "Mercure", correct: true }
+    ]
+  },
+  {
+    question: "Quelle est la formule du calcul de l'énergie de masse? ",
+    options: [
+      { text: "E = m * c * c", correct: true },
+      { text: "E = m * c", correct: false },
+      { text: "E = m * c * c * c", correct: false },
+      { text: "E = m * c * c * c * c", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la loi de la chute libre ? ",
+    options: [
+      { text: "F = m * a", correct: true },
+      { text: "F = m * g", correct: false },
+      { text: "F = m * a * g", correct: false },
+      { text: "F = m * g * g", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la forme developpee de (a+b)² ? ",
+    options: [
+      { text: "a² + b²", correct: false },
+      { text: "a² + b² + 2ab", correct: true },
+      { text: "a² + b² + 4ab", correct: false },
+      { text: "a² + b² + 3ab", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la forme developpee de (a-b)² ? ",
+    options: [
+      { text: "a² - b²", correct: false },
+      { text: "a² - b² + 2ab", correct: false },
+      { text: "a² - b² - 2ab", correct: true },
+      { text: "a² - b² - 3ab", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la forme developpee de (a+b)(a-b) ? ",
+    options: [
+      { text: "a² - b²", correct: true },
+      { text: "a² - b² + 2ab", correct: false },
+      { text: "a² - b² - 2ab", correct: false },
+      { text: "a² - b² - 3ab", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la loi de la conservation de l'énergie ? ",
+    options: [
+      { text: "E = m * c * c", correct: true },
+      { text: "E = m * c", correct: false },
+      { text: "E = m * c * c * c", correct: false },
+      { text: "E = m * c * c * c * c", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la formule de la loi d'Ohm ? ",
+    options: [
+      { text: "U = R * I", correct: true },
+      { text: "U = R * I * I", correct: false },
+      { text: "U = R * I * I * I", correct: false },
+      { text: "U = R * I * I * I * I", correct: false }
+    ]
+  },
+  {
+    question: "Quelle est la formule de la loi de Newton ? ",
+    options: [
+      { text: "F = m * a", correct: true },
+      { text: "F = m * g", correct: false },
+      { text: "F = m * a * g", correct: false },
+      { text: "F = m * g * g", correct: false }
+    ]
   }
 ];
 
@@ -64,14 +163,14 @@ export class SciencesQuizComponent {
   levels = [
     { id: 1, unlocked: true, requiredXP: 0 },
     { id: 2, unlocked: false, requiredXP: 80 },
-    { id: 3, unlocked: false, requiredXP: 200 },
-    { id: 4, unlocked: false, requiredXP: 400 },
-    { id: 5, unlocked: false, requiredXP: 600 },
-    { id: 6, unlocked: false, requiredXP: 800 },
-    { id: 7, unlocked: false, requiredXP: 1000 },
-    { id: 8, unlocked: false, requiredXP: 1200 },
-    { id: 9, unlocked: false, requiredXP: 1400 },
-    { id: 10, unlocked: false, requiredXP: 1600 },
+    { id: 3, unlocked: false, requiredXP: 160 },
+    { id: 4, unlocked: false, requiredXP: 240 },
+    { id: 5, unlocked: false, requiredXP: 320 },
+    { id: 6, unlocked: false, requiredXP: 400 },
+    { id: 7, unlocked: false, requiredXP: 480 },
+    { id: 8, unlocked: false, requiredXP: 560 },
+    { id: 9, unlocked: false, requiredXP: 640 },
+    { id: 10, unlocked: false, requiredXP: 720 },
   ];
 
   questions: any[] = [];
