@@ -1,1 +1,93 @@
-<p>sciences-quiz works!</p>
+<div class="game-wrapper">
+    <div class="level-selection-container animate__animated animate__fadeIn" *ngIf="gameState === 'selection'">
+        <header class="game-header text-center mb-5">
+            <h1 class="glow-text">Laboratoire de Sciences</h1>
+            <p>Déverrouillez les mystères de l'univers</p>
+        </header>
+
+        <div class="levels-grid">
+            <div *ngFor="let lvl of levels" class="level-card-wrapper" [class.locked]="!lvl.unlocked"
+                (click)="selectLevel(lvl)">
+
+                <div class="level-card">
+                    <div class="level-inner">
+                        <div class="level-front">
+                            <span class="level-num">{{ lvl.id }}</span>
+                            <div class="lock-icon" *ngIf="!lvl.unlocked">
+                                <i class="bi bi-lock-fill"></i>
+                            </div>
+                            <div class="xp-badge" *ngIf="!lvl.unlocked">{{ lvl.requiredXP }} XP</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="level-label">Niveau {{ lvl.id }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-arena animate__animated animate__zoomIn" *ngIf="gameState === 'playing'">
+        <div class="arena-header">
+            <div class="stat-pill">
+                <i class="bi bi- trophy"></i> {{ currentLevelXP }} XP
+            </div>
+
+            <div class="timer-container">
+                <svg class="timer-svg" viewBox="0 0 100 100">
+                    <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="timer-progress" cx="50" cy="50" r="45" [style.stroke]="progressColor"
+                        [style.stroke-dashoffset]="440 - (440 * timeLeft) / maxTime">
+                    </circle>
+                </svg>
+                <span class="time-text" [style.color]="progressColor">{{ timeLeft }}</span>
+            </div>
+
+            <div class="stat-pill">
+                {{ currentQuestionIndex + 1 }}/10
+            </div>
+        </div>
+
+        <div class="question-container mt-5">
+            <div class="progress-mini-bar mb-4">
+                <div class="fill" [style.width.%]="(currentQuestionIndex + 1) * 10"></div>
+            </div>
+
+            <h2 class="question-text animate__animated animate__fadeInUp">
+                {{ questions[currentQuestionIndex].question }}
+            </h2>
+
+            <div class="options-layout mt-4">
+                <button *ngFor="let opt of questions[currentQuestionIndex].options; let i = index"
+                    class="option-card animate__animated animate__fadeInUp" [style.animation-delay]="i * 0.1 + 's'"
+                    (click)="submitAnswer(i)">
+                    <span class="option-letter">{{ ['A', 'B', 'C', 'D'][i] }}</span>
+                    <span class="option-content">{{ opt.text }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="result-overlay animate__animated animate__fadeIn" *ngIf="gameState === 'result'">
+        <div class="result-modal shadow-lg text-center">
+            <div class="icon-header" [class.success]="currentLevelXP >= 80">
+                <i class="bi" [ngClass]="currentLevelXP >= 80 ? 'bi-stars' : 'bi-exclamation-triangle'"></i>
+            </div>
+
+            <h2 class="mt-3">{{ currentLevelXP >= 80 ? 'INCROYABLE !' : 'PRESQUE !' }}</h2>
+            <div class="final-score-box">
+                <span class="score-num">{{ currentLevelXP }}</span>
+                <span class="score-label">XP GAGNÉS</span>
+            </div>
+
+            <p class="text-muted" *ngIf="currentLevelXP < 80">Il vous faut 80 XP pour débloquer la suite.</p>
+
+            <div class="modal-footer-btns">
+                <button class="btn-action replay" (click)="gameState = 'selection'">
+                    <i class="bi bi-grid"></i> Menu
+                </button>
+                <button class="btn-action next" (click)="startLevel(1)">
+                    <i class="bi bi-arrow-clockwise"></i> Rejouer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -42,29 +42,6 @@
     z-index: 1000;
 }
 
-.search-bar-glass {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    width: 350px;
-}
-
-.search-bar-glass input {
-    background: transparent;
-    border: none;
-    color: white;
-    outline: none;
-    margin-left: 10px;
-    width: 100%;
-}
-
-.search-bar-glass input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
 /* Container principal avec Glassmorphism poussé */
 .welcome-card-glass {
     position: relative;
@@ -494,8 +471,6 @@
     right: 5px;
     color: rgba(255, 255, 255, 0.4);
 }
-
-/* Couleurs spécifiques par catégorie débloquée */
 
 /* TECH - Bleu Cyan Electrique */
 .ach-tech.active-ach i {
@@ -1116,154 +1091,6 @@
 .ach-icon.active {
     color: #ffca28;
     background: rgba(255, 255, 255, 0.2);
-}
-
-/* ========================================
-   NAVIGATION RESPONSIVE - CORRIGÉE
-======================================= */
-.player-nav {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-/* ✅ NOUVEAU : Container recherche responsive */
-.search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex: 1;
-    max-width: 400px;
-    margin: 0 1rem;
-}
-
-.search-bar-glass {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    width: 350px;
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-
-.search-bar-glass input {
-    background: transparent;
-    border: none;
-    color: white;
-    outline: none;
-    margin-left: 10px;
-    width: 100%;
-    opacity: 1;
-    transition: all 0.3s ease;
-}
-
-.search-bar-glass input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* ✅ NOUVEAU : Toggle bouton recherche mobile */
-.search-toggle-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 768px) {
-    .player-nav {
-        padding: 1rem;
-    }
-
-    .search-container {
-        max-width: none;
-        flex: none;
-        margin: 0;
-    }
-
-    .search-toggle-btn {
-        display: block;
-    }
-
-    .search-bar-glass.search-collapsed {
-        width: 50px !important;
-        padding: 8px 12px;
-    }
-
-    .search-bar-glass.search-collapsed input {
-        width: 0;
-        opacity: 0;
-        margin-left: 0;
-    }
-
-    .search-bar-glass input.input-visible {
-        width: 200px;
-        opacity: 1;
-        margin-left: 10px;
-    }
-
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .notification-circle {
-        padding: 8px 12px;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .search-bar-glass input.input-visible {
-        width: 150px;
-    }
-}
-
-/* ========================================
-   CONTENU PRINCIPAL + SCROLL - CORRIGÉ
-======================================= */
-.main-content-wrapper {
-    height: calc(100vh - 80px);
-    /* Hauteur nav soustraite */
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-}
-
-.main-content-wrapper::-webkit-scrollbar {
-    width: 6px;
-}
-
-.main-content-wrapper::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.main-content-wrapper::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-}
-
-/* Bloque scroll body quand modal ouvert */
-body.modal-open {
-    overflow: hidden;
 }
 
 

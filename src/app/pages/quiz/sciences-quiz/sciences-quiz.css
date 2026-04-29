@@ -1,0 +1,183 @@
+/* --- FOND ET WRAPPER --- */
+.game-wrapper {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: radial-gradient(circle at top right, #1e3a8a, #0f172a);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* --- GRILLE DE NIVEAUX (5 PAR LIGNE) --- */
+.levels-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 colonnes exactes */
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+    .levels-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .levels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.level-card-wrapper {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.level-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 20px;
+    position: relative;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.level-card-wrapper:hover:not(.locked) {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.level-card-wrapper.locked {
+    filter: grayscale(1);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.level-num {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(to bottom, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- ARENA DE JEU --- */
+.quiz-arena {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.arena-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timer-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.timer-svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.timer-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.timer-progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.time-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* --- OPTIONS --- */
+.options-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.option-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s;
+}
+
+.option-card:hover {
+    background: rgba(35, 213, 171, 0.2);
+    border-color: #23d5ab;
+    transform: translateX(10px);
+}
+
+.option-letter {
+    background: rgba(255, 255, 255, 0.1);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* --- RESULT MODAL --- */
+.result-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.result-modal {
+    background: #1e293b;
+    padding: 50px;
+    border-radius: 40px;
+    max-width: 450px;
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-num {
+    font-size: 5rem;
+    font-weight: 900;
+    color: #23d5ab;
+    display: block;
+}
