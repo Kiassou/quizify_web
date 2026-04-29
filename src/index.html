@@ -17,30 +17,19 @@
   <link rel="icon" type="image/x-icon" sizes="16x16" href="public/assets/images/quizify.png">
 
   <style>
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    body, html {
+      margin: 0; padding: 0; height: 100%;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #4158D0, #C850C0, #FFCC70, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab,#4158D0, #C850C0, #FFCC70, #ee7752, #e73c7e, #23a6d5, #23d5ab);
       background-size: 400% 400%;
       animation: gradient 15s ease infinite;
       overflow: hidden;
     }
 
     @keyframes gradient {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .app-loading {
@@ -51,15 +40,10 @@
       height: 100vh;
       color: white;
       text-align: center;
-      position: fixed;
-      /* Fixé pour couvrir tout l'écran */
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      position: fixed; /* Fixé pour couvrir tout l'écran */
+      top: 0; left: 0; right: 0; bottom: 0;
       z-index: 9999;
-      transition: opacity 1s ease-out;
-      /* Pour une disparition fluide */
+      transition: opacity 1s ease-out; /* Pour une disparition fluide */
     }
 
     .loader-card {
@@ -73,60 +57,31 @@
     }
 
     .quizify-logo-loader {
-      font-size: 4rem;
-      margin-bottom: 1rem;
+      font-size: 4rem; margin-bottom: 1rem;
       filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 0.8;
-      }
-
-      50% {
-        transform: scale(1.1);
-        opacity: 1;
-      }
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
     }
 
-    .brand-name {
-      font-weight: 700;
-      font-size: 2.5rem;
-      letter-spacing: -1px;
-      margin-bottom: 0.5rem;
-    }
-
-    .loader-text {
-      font-weight: 300;
-      font-size: 1rem;
-      opacity: 0.9;
-      margin-bottom: 2rem;
-    }
+    .brand-name { font-weight: 700; font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 0.5rem; }
+    .loader-text { font-weight: 300; font-size: 1rem; opacity: 0.9; margin-bottom: 2rem; }
 
     .custom-spinner {
-      width: 50px;
-      height: 50px;
+      width: 50px; height: 50px;
       border: 3px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       border-top-color: #fff;
       animation: spin 1s ease-in-out infinite;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* Classe pour cacher le loader proprement */
-    .fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
+    .fade-out { opacity: 0; pointer-events: none; }
   </style>
 </head>
 
@@ -151,16 +106,16 @@
 
   <script>
     // Script pour forcer l'affichage pendant 5 secondes
-    window.addEventListener('load', function () {
+    window.addEventListener('load', function() {
       const loader = document.getElementById('global-loader');
-
-      setTimeout(function () {
+      
+      setTimeout(function() {
         loader.classList.add('fade-out'); // Déclenche la transition CSS (1s)
-
+        
         // On supprime l'élément du DOM après la transition pour libérer la mémoire
-        setTimeout(function () {
+        setTimeout(function() {
           loader.style.display = 'none';
-        }, 1000);
+        }, 1000); 
 
       }, 5000); // 5000ms = 5 secondes
     });
