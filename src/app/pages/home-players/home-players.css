@@ -1337,3 +1337,126 @@ body.modal-open {
     max-height: 90vh;
     overflow-y: auto;
 }
+
+/* ==========================================
+   ALIGNEMENT NAVIGATION (Horizontal)
+   ========================================== */
+.player-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    /* Plus compact sur petit écran */
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    /* Aligne notification et avatar verticalement */
+    gap: 15px;
+    /* Espace entre la cloche et le dropdown */
+}
+
+/* Ajustement boutons nav pour qu'ils soient sur la même ligne */
+.notification-btn,
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+/* ==========================================
+   STRUCTURE RESPONSIVE (Mobile, Tablette, Desktop)
+   ========================================== */
+
+/* 1. Mobile (Par défaut) */
+.main-content-wrapper {
+    overflow-y: auto;
+    height: calc(100vh - 70px);
+    /* Ajuste selon la hauteur de ta nav */
+}
+
+.welcome-card-glass {
+    padding: 20px;
+}
+
+.welcome-content {
+    flex-direction: column;
+    /* Texte au dessus du visuel sur mobile */
+    text-align: center;
+}
+
+.welcome-visual {
+    display: none;
+    /* Cache le visuel trop gros sur petit mobile */
+}
+
+/* 2. Tablette et Desktop (Écrans larges) */
+@media (min-width: 992px) {
+    .welcome-content {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .welcome-visual {
+        display: block;
+    }
+
+    /* On s'assure que le contenu et la sidebar ne s'écrasent pas */
+    .row {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+}
+
+/* 3. Ajustements spécifiques Mobile (< 768px) */
+@media (max-width: 767px) {
+    .player-nav {
+        padding: 10px 15px;
+    }
+
+    .brand-logo {
+        font-size: 1.2rem;
+        /* Logo plus petit */
+    }
+
+    .section-header-chic {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+
+    /* Sidebar passe en dessous et prend toute la largeur */
+    .col-lg-4 {
+        margin-top: 30px;
+    }
+
+    /* Grille de quiz : 1 seule colonne sur mobile */
+    .row.mb-5 .col-md-6 {
+        width: 100%;
+    }
+
+    /* Modal plus large sur mobile pour la lisibilité */
+    .modal-container-chic {
+        width: 95% !important;
+        margin: 10px;
+        max-height: 90vh;
+    }
+}
+
+/* ==========================================
+  CORRECTIF SCROLL & OVERFLOW
+   ========================================== */
+.home-container {
+    overflow: hidden;
+    /* Empêche le double scroll */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    /* Seul le contenu défile, pas la nav */
+    -webkit-overflow-scrolling: touch;
+}

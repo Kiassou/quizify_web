@@ -1,20 +1,24 @@
 <div class="home-container">
+    <main class="content-wrapper">
+        <div class="container p-4">
+            <header class="hero-section text-center mb-5 animate__animated animate__zoomIn">
+                <h1>Prêt pour un nouveau défi ? 🚀</h1>
+                <p>Choisis une catégorie et montre ce que tu as dans le ventre !</p>
+            </header>
 
-    <main class="content p-4">
-        <header class="hero-section text-center mb-5 animate__animated animate__zoomIn">
-            <h1>Prêt pour un nouveau défi ? 🚀</h1>
-            <p>Choisis une catégorie et montre ce que tu as dans le ventre !</p>
-        </header>
-
-        <div class="row g-4">
-            <div class="col-6 col-md-3" *ngFor="let cat of categories; let i = index">
-                <div class="category-card animate__animated animate__fadeInUp" [style.animation-delay]="i * 0.1 + 's'">
-                    <div class="icon-box" [style.background-color]="cat.color">
-                        <i class="bi" [ngClass]="cat.icon"></i>
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let cat of categories; let i = index">
+                    <div class="category-card animate__animated animate__fadeInUp"
+                        [style.animation-delay]="i * 0.1 + 's'">
+                        <div class="icon-box" [style.background-color]="cat.color">
+                            <i class="bi" [ngClass]="cat.icon"></i>
+                        </div>
+                        <h3>{{ cat.name }}</h3>
+                        <span class="badge-count">{{ cat.count }} Quiz disponibles</span>
+                        <button class="btn-play-glass" (click)="startQuiz(cat.id)">
+                            Jouer <i class="bi bi-play-fill"></i>
+                        </button>
                     </div>
-                    <h3>{{ cat.name }}</h3>
-                    <span class="badge">{{ cat.count }} Quiz</span>
-                    <button class="btn-play">Jouer <i class="bi bi-play-fill"></i></button>
                 </div>
             </div>
         </div>

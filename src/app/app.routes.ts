@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard, guestGuard } from './auth.guard'; // On importe nos futurs gardiens
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home-players', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   // --- ROUTES PUBLIQUES (Accessibles uniquement si NON connecté) ---
   {
@@ -67,6 +67,32 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/notifications/notifications').then(m => m.NotificationsComponent)
   },
+
+  {
+    path: 'sciences-quiz',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/quiz/sciences-quiz/sciences-quiz').then(m => m.SciencesQuizComponent)
+  },
+  {
+    path: 'histoires-quiz',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/quiz/histoires-quiz/histoires-quiz').then(m => m.HistoiresQuizComponent)
+  },
+  {
+    path: 'tech-quiz',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/quiz/tech-quiz/tech-quiz').then(m => m.TechQuizComponent)
+  },
+  {
+    path: 'sport-quiz',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/quiz/sport-quiz/sport-quiz').then(m => m.SportQuizComponent)
+  },
+
 
   // Redirection globale si la route n'existe pas
   { path: '**', redirectTo: 'home-players' }

@@ -4,90 +4,132 @@
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: white;
-}
-
-/* Navbar Style */
-.player-nav {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    padding: 15px 30px;
+    width: 100%;
+    overflow: hidden;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    flex-direction: column;
 }
 
-.nav-brand {
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.btn-logout {
-    background: rgba(255, 0, 0, 0.2);
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 10px;
-    margin-left: 15px;
-    transition: 0.3s;
-}
-
-.btn-logout:hover {
-    background: rgba(255, 0, 0, 0.5);
+.content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    /* Active le scroll vertical */
+    padding-bottom: 50px;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Hero Section */
 .hero-section h1 {
-    font-weight: 800;
-    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    font-size: 2.2rem;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Category Cards */
+.hero-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+}
+
+/* Category Card Style Glassmorphism */
 .category-card {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 25px;
-    padding: 30px;
+    padding: 30px 20px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .category-card:hover {
     transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* Icon Box */
 .icon-box {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-.btn-play {
-    margin-top: 15px;
+.category-card h3 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.badge-count {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Button Jouer Style */
+.btn-play-glass {
     width: 100%;
-    border: none;
     background: white;
     color: #333;
-    padding: 10px;
-    border-radius: 12px;
-    font-weight: bold;
-    transition: 0.3s;
+    border: none;
+    padding: 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin-top: auto;
+    /* Aligne le bouton en bas */
 }
 
-.btn-play:hover {
-    background: #23a6d5;
-    color: white;
+.btn-play-glass:hover {
+    background: #f8f9fa;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+
+/* Mobile (jusqu'à 576px) */
+@media (max-width: 575px) {
+    .hero-section h1 {
+        font-size: 1.6rem;
+    }
+
+    .category-card {
+        padding: 20px 15px;
+    }
+
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+    /* Force 2 colonnes même sur petit mobile si tu veux */
+    .col-6 {
+        width: 50%;
+    }
+}
+
+/* Tablette (768px à 992px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .category-card {
+        padding: 25px;
+    }
 }
 
 @keyframes gradientBG {
