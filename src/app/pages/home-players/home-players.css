@@ -1266,47 +1266,6 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* ========================================
-   DROPDOWN CORRIGÉ
-======================================= */
-.dropdown {
-    position: relative;
-}
-
-.dropbtn-glass {
-    background: rgba(255, 255, 255, 0.08);
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    backdrop-filter: blur(10px);
-}
-
-.dropdown-content-glass {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    padding-top: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(25px);
-    min-width: 260px;
-    border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    z-index: 1100;
-    overflow: hidden;
-}
-
-.dropdown:hover .dropdown-content-glass,
-.dropdown-content-glass.show {
-    display: block;
-}
 
 /* ========================================
    MODALS CORRIGÉS - POSITION ABSOLUE
