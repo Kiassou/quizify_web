@@ -1,1 +1,0 @@
-import{Ga as o,Wa as m,Xa as t,eb as a}from"./chunk-UVZHS53H.js";var i=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=o({type:n,selectors:[["app-home-admin"]],decls:2,vars:0,template:function(e,s){e&1&&(m(0,"p"),a(1,"home-admin works!"),t())},encapsulation:2})};export{i as HomeAdminComponent};
