@@ -1,1 +1,61 @@
-<p>tech-quiz works!</p>
+<div class="tech-wrapper">
+    <!-- SELECTION DU SYSTEME -->
+    <div class="matrix-selection p-4" *ngIf="gameState === 'selection'">
+        <div class="terminal-header mb-5">
+            <h1 class="tech-glitch">CORE_DEBUGGER</h1>
+            <div class="xp-status">SYSTEM_XP: {{ totalTechXP }}</div>
+        </div>
+
+        <div class="tech-grid">
+            <div *ngFor="let lvl of levels" class="node-card" [class.node-locked]="!lvl.unlocked"
+                (click)="selectLevel(lvl)">
+                <div class="node-pulse" *ngIf="lvl.unlocked"></div>
+                <span class="node-id">{{ lvl.id < 10 ? '0' + lvl.id : lvl.id }}</span>
+                        <div class="node-label" *ngIf="!lvl.unlocked">LOCKED</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERFACE DE JEU -->
+    <div class="game-terminal" *ngIf="gameState === 'playing'">
+        <div class="status-bar">
+            <div class="stat">MODE: EXECUTION</div>
+            <div class="stat-xp">XP: {{ currentLevelXP }}</div>
+            <div class="stat-progress">STAGES: {{ currentQuestionIndex + 1 }}/10</div>
+        </div>
+
+        <div class="main-console">
+            <div class="timer-line" [style.width.%]="(timeLeft / maxTime) * 100" [style.background]="progressColor">
+            </div>
+
+            <div class="code-box mt-4">
+                <p class="cmd-prefix">> FETCH QUESTION_DATA...</p>
+                <h2 class="tech-question">{{ questions[currentQuestionIndex].question }}</h2>
+            </div>
+
+            <div class="binary-options mt-5">
+                <button *ngFor="let opt of questions[currentQuestionIndex].options; let i = index" class="tech-btn"
+                    (click)="submitAnswer(i)">
+                    <span class="btn-index">[{{ i }}]</span>
+                    {{ opt.text }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTAT DU DEBUG -->
+    <div class="terminal-overlay" *ngIf="gameState === 'result'">
+        <div class="result-terminal animate__animated animate__flipInX">
+            <h2 [class.text-success]="currentLevelXP >= 80">{{ currentLevelXP >= 80 ? 'SYSTEM_OPTIMIZED' :
+                'COMPILE_ERROR' }}</h2>
+            <div class="final-report mt-3">
+                <p>SUCCESS_RATE: {{ currentLevelXP }}%</p>
+                <p>STATUS: {{ currentLevelXP >= 80 ? 'LEVEL_UNLOCKED' : 'RETRY_REQUIRED' }}</p>
+            </div>
+            <div class="action-row mt-4">
+                <button class="btn-neon" (click)="gameState = 'selection'">BACK_TO_CORE</button>
+                <button class="btn-neon-outline" (click)="startLevel(1)">REBOOT_LEVEL</button>
+            </div>
+        </div>
+    </div>
+</div>

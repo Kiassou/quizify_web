@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
+
 
 const scienceQuestions = [
   {
@@ -146,7 +148,7 @@ const scienceQuestions = [
       { text: "F = m * a * g", correct: false },
       { text: "F = m * g * g", correct: false }
     ]
-  }
+  },
 ];
 
 @Component({
@@ -156,10 +158,10 @@ const scienceQuestions = [
   templateUrl: './sciences-quiz.html',
   styleUrl: './sciences-quiz.css',
 })
-export class SciencesQuizComponent {
-  constructor(private router: Router) { }
-
+export class SciencesQuizComponent implements OnInit, OnDestroy {
   gameState: 'selection' | 'playing' | 'result' = 'selection';
+  
+  // Niveaux avec paliers de 80 XP (160, 240, etc.)
   levels = [
     { id: 1, unlocked: true, requiredXP: 0 },
     { id: 2, unlocked: false, requiredXP: 80 },
@@ -176,11 +178,22 @@ export class SciencesQuizComponent {
   questions: any[] = [];
   currentQuestionIndex: number = 0;
   currentLevelXP: number = 0;
-  timeLeft: number = 0;
-  maxTime: number = 20;
+  totalXP: number = 0; // XP total accumulé sur tous les niveaux
+  
+  timeLeft: number = 10;
+  maxTime: number = 10;
   timerInterval: any;
-
   progressColor: string = '#23d5ab';
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    // Charger la progression sauvegardée
+    const savedLevels = localStorage.getItem('science_levels');
+    const savedXP = localStorage.getItem('science_total_xp');
+    if (savedLevels) this.levels = JSON.parse(savedLevels);
+    if (savedXP) this.totalXP = parseInt(savedXP);
+  }
 
   selectLevel(level: any) {
     if (level.unlocked) {
@@ -192,8 +205,13 @@ export class SciencesQuizComponent {
     this.gameState = 'playing';
     this.currentQuestionIndex = 0;
     this.currentLevelXP = 0;
+    this.questions = this.generateQuestions();
+    this.loadQuestion();
+  }
+
+  loadQuestion() {
     this.timeLeft = this.maxTime;
-    this.questions = this.generateQuestions(levelId);
+    this.progressColor = '#23d5ab';
     this.startTimer();
   }
 
@@ -201,61 +219,58 @@ export class SciencesQuizComponent {
     clearInterval(this.timerInterval);
     this.timerInterval = setInterval(() => {
       this.timeLeft--;
-      if (this.timeLeft <= 5) {
-        this.progressColor = '#e74c3c';
-      } else {
-        this.progressColor = '#23d5ab';
-      }
+      
+      // Changement de couleur dynamique
+      if (this.timeLeft <= 3) this.progressColor = '#e74c3c';
+      else if (this.timeLeft <= 6) this.progressColor = '#f1c40f';
 
       if (this.timeLeft <= 0) {
-        this.endRound(false);
+        this.submitAnswer(-1); // Temps écoulé : on envoie un index invalide
       }
     }, 1000);
   }
 
   submitAnswer(index: number) {
-    if (this.questions[this.currentQuestionIndex].options[index].correct) {
-      // Réponse correcte
-      const xpToAdd = Math.floor((this.timeLeft / this.maxTime) * 10); // Bonus temps
-      this.currentLevelXP += xpToAdd;
-      // Animation de feedback visuel ici...
-    }
-
-    this.currentQuestionIndex++;
-
-    if (this.currentQuestionIndex >= 10) {
-      this.endRound(true);
-    }
-  }
-
-  endRound(completed: boolean) {
     clearInterval(this.timerInterval);
-    if (completed && this.currentLevelXP >= 80) {
-      this.completeLevel();
+
+    // Vérification de la réponse (index -1 signifie temps écoulé)
+    if (index !== -1 && this.questions[this.currentQuestionIndex].options[index].correct) {
+      this.currentLevelXP += 10;
     }
+
+    // Passage à la suite après un court délai pour l'animation
+    setTimeout(() => {
+      this.currentQuestionIndex++;
+      if (this.currentQuestionIndex < 10) {
+        this.loadQuestion();
+      } else {
+        this.finishLevel();
+      }
+    }, 500);
+  }
+
+  finishLevel() {
     this.gameState = 'result';
-  }
-
-  completeLevel() {
-    // Mettre à jour le niveau actuel dans le tableau
-    const levelIndex = this.levels.findIndex(l => l.id === (this.currentQuestionIndex / 10));
-    if (levelIndex !== -1 && levelIndex < this.levels.length - 1) {
-      this.levels[levelIndex + 1].unlocked = true;
-      // Sauvegarder dans le localStorage
-      localStorage.setItem('science_levels', JSON.stringify(this.levels));
-    }
-  }
-
-  generateQuestions(level: number) {
-    const qs = [];
-    const basePool = [...scienceQuestions];
     
-    for (let i = 0; i < 10; i++) {
-      const q = basePool[Math.floor(Math.random() * basePool.length)];
-      // Adapter la difficulté si besoin
-      qs.push(q);
+    // Si succès (80% de bonnes réponses)
+    if (this.currentLevelXP >= 80) {
+      this.totalXP += this.currentLevelXP;
+      localStorage.setItem('science_total_xp', this.totalXP.toString());
+      
+      // Débloquer le niveau suivant
+      const nextLevel = this.levels.find(l => !l.unlocked && this.totalXP >= l.requiredXP);
+      if (nextLevel) {
+        nextLevel.unlocked = true;
+        localStorage.setItem('science_levels', JSON.stringify(this.levels));
+      }
     }
-    return qs;
+  }
+
+  generateQuestions() {
+    // On mélange les questions et on en prend 10
+    return [...scienceQuestions]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 10);
   }
 
   ngOnDestroy() {

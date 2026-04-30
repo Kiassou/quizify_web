@@ -1,0 +1,86 @@
+.history-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2c1810 0%, #000000 100%);
+    padding: 50px 20px;
+    color: #f3e5ab;
+    /* Couleur parchemin */
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 par ligne */
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.lvl-card {
+    aspect-ratio: 1/1;
+    background: rgba(243, 229, 171, 0.05);
+    border: 2px solid rgba(243, 229, 171, 0.2);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lvl-card:hover:not(.locked) {
+    border-color: #f1c40f;
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
+    transform: translateY(-5px);
+}
+
+.lvl-card.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.lvl-id {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* Arena Jeu */
+.timer-orb {
+    width: 80px;
+    height: 80px;
+    border: 5px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.history-btn {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(243, 229, 171, 0.3);
+    color: #f3e5ab;
+    border-radius: 12px;
+    text-align: left;
+    transition: 0.2s;
+}
+
+.history-btn:hover {
+    background: #f1c40f;
+    color: #2c1810;
+    font-weight: bold;
+}
+
+.result-paper {
+    background: #f3e5ab;
+    color: #2c1810;
+    padding: 50px;
+    border-radius: 5px;
+    /* Look parchemin plus carré */
+    box-shadow: 10px 10px 0px #f1c40f;
+}

@@ -1,0 +1,132 @@
+.sport-container {
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #1e272e 0%, #050505 100%);
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Grille 5 par ligne */
+.levels-grid-sport {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sport-card {
+    background: linear-gradient(145deg, #2d3436, #000000);
+    border: 2px solid #ee7752;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 10px 20px rgba(238, 119, 82, 0.1);
+}
+
+.sport-card:hover:not(.locked-card) {
+    transform: scale(1.1) rotate(2deg);
+    background: #ee7752;
+    color: black;
+}
+
+.locked-card {
+    border-color: #636e72;
+    opacity: 0.5;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+.lvl-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+/* Arena Styling */
+.timer-radial {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.circular-chart {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s linear;
+}
+
+.time-left {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Options */
+.options-grid-sport {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.sport-option-btn {
+    background: #2d3436;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s;
+}
+
+.sport-option-btn:hover {
+    background: #0fbcf9;
+    border-color: #0fbcf9;
+    transform: translateY(-5px);
+}
+
+.opt-label {
+    background: rgba(255, 255, 255, 0.1);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Result Box */
+.result-box-sport {
+    background: #1e272e;
+    padding: 40px;
+    border-radius: 30px;
+    border-top: 5px solid #ee7752;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.trophy-icon {
+    font-size: 4rem;
+    color: #f1c40f;
+}
+
+.display-xp {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #ee7752;
+}

@@ -1,1 +1,65 @@
-<p>sport-quiz works!</p>
+<div class="sport-container">
+    <!-- SÉLECTION DES NIVEAUX -->
+    <div class="selection-screen p-4" *ngIf="gameState === 'selection'">
+        <header class="text-center mb-5 animate__animated animate__fadeInDown">
+            <h1 class="stadium-text">Arène Sportive</h1>
+            <div class="xp-banner">XP TOTAL: {{ totalSportXP }}</div>
+        </header>
+
+        <div class="levels-grid-sport">
+            <div *ngFor="let lvl of levels" class="sport-card" [class.locked-card]="!lvl.unlocked"
+                (click)="selectLevel(lvl)">
+                <div class="card-inner">
+                    <span class="lvl-num">{{ lvl.id }}</span>
+                    <i class="bi bi-lock-fill" *ngIf="!lvl.unlocked"></i>
+                </div>
+                <div class="xp-req" *ngIf="!lvl.unlocked">{{ lvl.requiredXP }} XP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ZONE DE MATCH (QUIZ) -->
+    <div class="match-arena p-4" *ngIf="gameState === 'playing'">
+        <div class="hud-top">
+            <div class="score-box">XP: {{ currentLevelXP }}</div>
+            <div class="timer-radial" [style.color]="progressColor">
+                <span class="time-left">{{ timeLeft }}</span>
+                <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle" [style.stroke]="progressColor"
+                        [style.stroke-dasharray]="(timeLeft * 10) + ', 100'"
+                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+            </div>
+            <div class="progress-pill">{{ currentQuestionIndex + 1 }}/10</div>
+        </div>
+
+        <div class="stadium-content mt-5">
+            <h2 class="sport-question animate__animated animate__slideInLeft">
+                {{ questions[currentQuestionIndex].question }}
+            </h2>
+
+            <div class="options-grid-sport mt-4">
+                <button *ngFor="let opt of questions[currentQuestionIndex].options; let i = index"
+                    class="sport-option-btn animate__animated animate__fadeInUp" [style.animation-delay]="i * 0.1 + 's'"
+                    (click)="submitAnswer(i)">
+                    <span class="opt-label">{{ ['A', 'B', 'C', 'D'][i] }}</span>
+                    {{ opt.text }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RÉSULTAT DU MATCH -->
+    <div class="match-result-overlay" *ngIf="gameState === 'result'">
+        <div class="result-box-sport animate__animated animate__bounceIn">
+            <i class="bi bi-trophy-fill trophy-icon" *ngIf="currentLevelXP >= 80"></i>
+            <h2 class="mt-3">{{ currentLevelXP >= 80 ? 'PODIUM !' : 'FIN DU MATCH' }}</h2>
+            <div class="display-xp">{{ currentLevelXP }}<span>XP GAGNÉS</span></div>
+
+            <div class="action-btns mt-4">
+                <button class="btn-sport-main" (click)="gameState = 'selection'">Continuer</button>
+                <button class="btn-sport-alt" (click)="startLevel(1)">Rejouer</button>
+            </div>
+        </div>
+    </div>
+</div>

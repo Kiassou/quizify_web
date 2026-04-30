@@ -1,1 +1,58 @@
-<p>histoires-quiz works!</p>
+<div class="history-wrapper">
+    <!-- SÉLECTION -->
+    <div class="selection-view animate__animated animate__fadeIn" *ngIf="gameState === 'selection'">
+        <div class="text-center mb-5">
+            <h1 class="history-title">Chroniques du Passé</h1>
+            <p class="history-subtitle">Total XP: {{ totalHistoryXP }}</p>
+        </div>
+
+        <div class="history-grid">
+            <div *ngFor="let lvl of levels" class="lvl-card" [class.locked]="!lvl.unlocked" (click)="selectLevel(lvl)">
+                <div class="lvl-content">
+                    <span class="lvl-id">{{ lvl.id }}</span>
+                    <i class="bi bi-lock-fill lock-icon" *ngIf="!lvl.unlocked"></i>
+                </div>
+                <div class="lvl-xp" *ngIf="!lvl.unlocked">{{ lvl.requiredXP }} XP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JEU -->
+    <div class="playing-view" *ngIf="gameState === 'playing'">
+        <div class="game-header">
+            <div class="xp-pill">Score: {{ currentLevelXP }}</div>
+            <div class="timer-orb" [style.border-color]="progressColor">
+                {{ timeLeft }}
+            </div>
+            <div class="q-count">{{ currentQuestionIndex + 1 }}/10</div>
+        </div>
+
+        <div class="arena-content mt-5">
+            <div class="progress-bar-container">
+                <div class="progress-fill" [style.width.%]="(currentQuestionIndex + 1) * 10"></div>
+            </div>
+
+            <h2 class="question-label">{{ questions[currentQuestionIndex].question }}</h2>
+
+            <div class="options-container">
+                <button *ngFor="let opt of questions[currentQuestionIndex].options; let i = index"
+                    class="history-btn animate__animated animate__fadeInUp" [style.animation-delay]="i * 0.1 + 's'"
+                    (click)="submitAnswer(i)">
+                    {{ opt.text }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RÉSULTAT -->
+    <div class="result-view animate__animated animate__zoomIn" *ngIf="gameState === 'result'">
+        <div class="result-paper text-center">
+            <h2>{{ currentLevelXP >= 80 ? 'Victoire Historique !' : 'L\'histoire se répète...' }}</h2>
+            <div class="final-xp">{{ currentLevelXP }}<span>XP</span></div>
+            <div class="btn-group mt-4">
+                <button class="btn-history-gold" (click)="gameState = 'selection'">Menu</button>
+                <button class="btn-history-outline" (click)="startLevel(1)">Réessayer</button>
+            </div>
+        </div>
+    </div>
+</div>
